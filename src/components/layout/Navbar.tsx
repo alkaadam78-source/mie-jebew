@@ -95,6 +95,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a href="#lokasi" className="hover:text-jebew-red transition-colors py-1">
               Lokasi & Jam
             </a>
+            <a
+              href="/admin"
+              className="ml-1 flex items-center gap-1 bg-neutral-900 hover:bg-black text-yellow-300 font-black text-xs px-2.5 py-1.5 border-2 border-black rounded-lg shadow-brutal-xs transition-all"
+              title="Buka Admin Control Center"
+            >
+              <span>🔒</span>
+              <span>Admin</span>
+            </a>
           </nav>
 
           {/* Action Buttons */}
@@ -455,7 +463,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-4 bg-cream-100 border-t-2 border-black text-center text-xs font-bold text-gray-600">
+              <div className="p-4 bg-cream-100 border-t-2 border-black text-center text-xs font-bold text-gray-600 flex flex-col items-center gap-2.5">
+                <a
+                  href="/admin"
+                  className="w-full flex items-center justify-center gap-2 bg-neutral-900 text-yellow-300 border-2 border-black py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider shadow-brutal-xs hover:bg-black transition-all"
+                >
+                  <span>🔒 Masuk Panel Admin</span>
+                </a>
                 <p>🍜 Mie Jebew Official • Powered by <strong className="text-black font-black">Crave Corner</strong></p>
               </div>
 
