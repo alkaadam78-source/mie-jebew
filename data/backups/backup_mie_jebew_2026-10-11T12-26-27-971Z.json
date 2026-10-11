@@ -1,0 +1,601 @@
+{
+  "meta": {
+    "backupId": "bkp_1791721587972_axyvg",
+    "version": "1.0",
+    "createdAt": "2026-10-11T12:26:27.984Z",
+    "backupType": "auto_daily",
+    "createdBy": "system_cron",
+    "notes": "Pencadangan harian terjadwal otomatis",
+    "totalTables": 21,
+    "totalRecords": 45
+  },
+  "data": {
+    "admin_users": [
+      {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@miejebew.com",
+        "password_hash": "$2b$10$SIo1Pex1uJ3/g9FIMCQAf.7X5uOV7/XiQdOy1vMpNHCaYDFrX/E.O",
+        "role": "SUPER_ADMIN",
+        "name": "Owner & Super Admin",
+        "is_active": 1,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "categories": [
+      {
+        "id": "all",
+        "name": "Semua Menu",
+        "slug": "all",
+        "icon": "✨",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "mie",
+        "name": "Mie Jebew",
+        "slug": "mie",
+        "icon": "🍜",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "paket",
+        "name": "Paket Hemat",
+        "slug": "paket",
+        "icon": "🔥",
+        "sort_order": 3,
+        "is_active": 1
+      },
+      {
+        "id": "topping",
+        "name": "Topping & Side",
+        "slug": "topping",
+        "icon": "🥚",
+        "sort_order": 4,
+        "is_active": 1
+      },
+      {
+        "id": "minuman",
+        "name": "Minuman Segar",
+        "slug": "minuman",
+        "icon": "🥤",
+        "sort_order": 5,
+        "is_active": 1
+      }
+    ],
+    "menu_items": [
+      {
+        "id": "mie-1",
+        "name": "Mie Jebew Original",
+        "category_id": "mie",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Mie kenyal pedas khas Jebew dengan bumbu rahasia gurih pedas nampol, taburan ayam melimpah, pangsit renyah, dan bakso lezat!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🔥 SERBA 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 1,
+        "is_active": 1,
+        "sort_order": 1,
+        "ingredients": "Mie kenyal, chili oil khas Jebew, ayam cincang gurih, pangsit goreng, daun bawang",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "mie-2",
+        "name": "Mie Jebew Kuah Pedas",
+        "category_id": "mie",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Menu mie kuah kaldu pedas berempah yang bikin segar dan keringat bercucuran!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🌶️ KUAH 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 2,
+        "ingredients": "Mie telur, kaldu ayam gurih, bumbu jebew pedas, bakso, sayuran segar",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "mie-3",
+        "name": "Mie Jebew Manis Gurih",
+        "category_id": "mie",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Kombinasi bumbu kecap manis istimewa berpadu dengan chili oil jebew nendang!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🍯 MANIS GURIH 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 0,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 3,
+        "ingredients": "Mie, kecap manis racikan, cabai rawit pedas, ayam cincang, pangsit",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "mie-4",
+        "name": "Mie Jebew Spesial Keju",
+        "category_id": "mie",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Sensasi pedas jebew lumer berpadu gurihnya saus keju spesial yang creamy!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🧀 CHEESE 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 4,
+        "ingredients": "Mie jebew, lelehan keju mozarella & keju cheddar gurih, taburan ayam",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "paket-1",
+        "name": "Paket Hemat Pelajar 10K",
+        "category_id": "paket",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Mie Jebew Original Level Bebas + Es Teh Manis Segar Jumbo!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "⭐ COMBO 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 1,
+        "is_active": 1,
+        "sort_order": 5,
+        "ingredients": "1 Porsi Mie Jebew, 1 Es Teh Jumbo",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "topping-1",
+        "name": "Pangsit Goreng Renyah (3 pcs)",
+        "category_id": "topping",
+        "price": 4000,
+        "sale_price": null,
+        "description": "Pangsit goreng isi ayam gurih super kriuk, teman setia mie jebew!",
+        "image": "",
+        "badge": "🥟 RENYAH",
+        "is_spicy_selectable": 0,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 6,
+        "ingredients": "Kulit pangsit renyah, daging ayam cincang olahan",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "minuman-1",
+        "name": "Es Teh Manis Jumbo",
+        "category_id": "minuman",
+        "price": 4000,
+        "sale_price": null,
+        "description": "Es teh manis segar ukuran jumbo penyelamat lidah terbakar dari pedasnya jebew!",
+        "image": "",
+        "badge": "🧊 SEGAR JUMBO",
+        "is_spicy_selectable": 0,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 7,
+        "ingredients": "Teh melati seduh, gula murni, es batu higienis",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "products_bottles": [
+      {
+        "id": "bot-1",
+        "name": "Chili Oil Jebew Mini Jar (100ml)",
+        "subtitle": "Bumbu Minyak Cabai Pedas Gurih Siap Saji",
+        "price": 10000,
+        "volume_ml": 100,
+        "description": "Chili oil racikan rahasia khas Mie Jebew dengan cabai rawit merah segar, bawang putih goreng, dan rempah aromatik pilihan.",
+        "heat_level": 4,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🔥 SERBA 10K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "bot-2",
+        "name": "Sambal Jebew Extra Hot Cup (100ml)",
+        "subtitle": "Pedas Nampol Menggelegar untuk Segala Makanan",
+        "price": 10000,
+        "volume_ml": 100,
+        "description": "Sambal ulek khas jebew dengan tingkat kepedasan maksimal. Cocok untuk cocolan gorengan, nasi hangat, mie instan, dan lauk!",
+        "heat_level": 5,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "☠️ SERBA 10K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "bot-3",
+        "name": "Bumbu Mie Jebew Sachet Praktis",
+        "subtitle": "Bikin Mie Jebew Sendiri di Rumah",
+        "price": 8000,
+        "volume_ml": 80,
+        "description": "Paket bumbu sachet komplit khas jebew, cukup aduk dengan mie rebus instan favoritmu dan rasakan sensasi jebew asli!",
+        "heat_level": 3,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "✨ HEMAT 8K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 3,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "custom_order_options": [
+      {
+        "id": "sp-0",
+        "group_type": "spice_level",
+        "name": "Level 0 — Gak Pedas",
+        "level_number": 0,
+        "badge": "👶 Safe Mode",
+        "description": "Gurih manis gurih tanpa cabe",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 1
+      },
+      {
+        "id": "sp-1",
+        "group_type": "spice_level",
+        "name": "Level 1 — Sedang",
+        "level_number": 1,
+        "badge": "🌶️ Anget Manja",
+        "description": "Pedas tipis-tipis menggugah selera",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 2
+      },
+      {
+        "id": "sp-2",
+        "group_type": "spice_level",
+        "name": "Level 2 — Pedas",
+        "level_number": 2,
+        "badge": "🌶️🌶️ Mulai Nendang",
+        "description": "Pedas mantap yang bikin keringat bercucuran",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 3
+      },
+      {
+        "id": "sp-3",
+        "group_type": "spice_level",
+        "name": "Level 3 — Super Pedas",
+        "level_number": 3,
+        "badge": "🔥 Best Seller",
+        "description": "Level paling favorit nagih abis!",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 4
+      },
+      {
+        "id": "sp-4",
+        "group_type": "spice_level",
+        "name": "Level 4 — Ekstra Pedas",
+        "level_number": 4,
+        "badge": "🔥🔥 Keringat Dingin",
+        "description": "Cabe melimpah ruah lidah terbakar",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 5
+      },
+      {
+        "id": "sp-5",
+        "group_type": "spice_level",
+        "name": "Level 5 — Jebew Maksimal",
+        "level_number": 5,
+        "badge": "☠️ Neraka Jebew",
+        "description": "Sensasi bibir jebew bergetar!",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 6
+      },
+      {
+        "id": "top-1",
+        "group_type": "topping",
+        "name": "Pangsit Goreng Renyah (2 pcs)",
+        "level_number": null,
+        "badge": "🥟 Ekstra Kriuk",
+        "description": "Pangsit renyah gurih",
+        "price_adjustment": 2000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 7
+      },
+      {
+        "id": "top-2",
+        "group_type": "topping",
+        "name": "Bakso Sapi Kenyal (2 pcs)",
+        "level_number": null,
+        "badge": "🥩 Daging Asli",
+        "description": "Bakso sapi lezat",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 8
+      },
+      {
+        "id": "top-3",
+        "group_type": "topping",
+        "name": "Telur Mata Sapi / Ceplok",
+        "level_number": null,
+        "badge": "🍳 Tambah Gurih",
+        "description": "Telur ayam segar matang/setengah matang",
+        "price_adjustment": 3000,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 9
+      },
+      {
+        "id": "top-4",
+        "group_type": "topping",
+        "name": "Ayam Tabur Melimpah",
+        "level_number": null,
+        "badge": "🍗 Ekstra Daging",
+        "description": "Porsi daging ayam gurih dobel",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 10
+      },
+      {
+        "id": "top-5",
+        "group_type": "topping",
+        "name": "Keju Mozarella Melt",
+        "level_number": null,
+        "badge": "🧀 Lumer Mewah",
+        "description": "Keju leleh hangat",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 11
+      }
+    ],
+    "bundles": [
+      {
+        "id": "bun-1",
+        "name": "Paket Combo Serba 10K",
+        "description": "1 Porsi Mie Jebew Level Bebas + 1 Es Teh Manis Jumbo + 1 Porsi Pangsit Renyah!",
+        "price": 10000,
+        "original_price": 14000,
+        "savings_badge": "HEMAT Rp4.000",
+        "items_included": "[\"1x Mie Jebew\",\"1x Es Teh Jumbo\",\"1x Pangsit Renyah\"]",
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "bun-2",
+        "name": "Paket Puas Dobel Topping 10K",
+        "description": "1 Porsi Mie Jebew Pedas Gurih + Pangsit Renyah + Bakso Sapi!",
+        "price": 10000,
+        "original_price": 13000,
+        "savings_badge": "SERBA 10K",
+        "items_included": "[\"1x Mie Jebew\",\"1x Pangsit Renyah\",\"1x Bakso Sapi\"]",
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "promotions": [
+      {
+        "id": "pro-1",
+        "title": "Promo Diskon Pengguna Baru",
+        "promo_code": "JEBEWBARU",
+        "description": "Dapatkan potongan 15% untuk pemesanan pertamamu via WhatsApp!",
+        "discount_type": "percentage",
+        "discount_value": 15,
+        "min_purchase": 25000,
+        "start_date": "2026-01-01",
+        "end_date": "2026-12-31",
+        "usage_limit": 1000,
+        "used_count": 0,
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "pro-2",
+        "title": "Potongan Langsung Rp5.000",
+        "promo_code": "HEMAT5RB",
+        "description": "Potongan Rp5.000 untuk minimal belanja Rp30.000",
+        "discount_type": "fixed",
+        "discount_value": 5000,
+        "min_purchase": 30000,
+        "start_date": "2026-01-01",
+        "end_date": "2026-12-31",
+        "usage_limit": 500,
+        "used_count": 0,
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "why_choose_us": [
+      {
+        "id": "w-1",
+        "title": "100% Cabai Asli Pilihan",
+        "description": "Kami hanya menggunakan cabai rawit segar langsung dari petani, tanpa bubuk cabai buatan atau pengawet berbahaya.",
+        "icon": "🌶️",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "w-2",
+        "title": "Bumbu Chili Oil Racikan Rahasia",
+        "description": "Minyak cabai dimasak perlahan (slow-cooked) selama 4 jam dengan rempah aromatik agar cita rasa gurih dan wanginya meresap sempurna.",
+        "icon": "🔥",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "w-3",
+        "title": "Higienis & Selalu Dibuat Fresh",
+        "description": "Setiap pesanan direbus dan diracik dadakan saat dipesan sehingga mie tetap kenyal dan disajikan hangat panas.",
+        "icon": "✨",
+        "sort_order": 3,
+        "is_active": 1
+      },
+      {
+        "id": "w-4",
+        "title": "Pesan Kilat Tanpa Antre",
+        "description": "Pesan praktis langsung via WhatsApp smartphone, tanpa repot daftar akun panjang atau install aplikasi tambahan.",
+        "icon": "⚡",
+        "sort_order": 4,
+        "is_active": 1
+      }
+    ],
+    "behind_the_kitchen": [
+      {
+        "id": "k-1",
+        "title": "Proses Perebusan & Racikan Cabai Segar",
+        "description": "Setiap helai mie direbus dengan ketepatan suhu air agar mendapatkan tekstur kenyal sempurna khas Jebew.",
+        "image_url": "/team-cravecorner.jpg",
+        "tag": "Dapur Jebew",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "k-2",
+        "title": "Penyajian Topping Ayam & Pangsit Renyah",
+        "description": "Daging ayam cincang gurih ditaburkan dengan royal di atas setiap mangkok mie jebew panas.",
+        "image_url": "/team-slide-faces.jpg",
+        "tag": "Kualitas Bahan",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "k-3",
+        "title": "Tim Crave Corner yang Penuh Semangat",
+        "description": "Dedikasi tinggi dari seluruh tim untuk menghadirkan kuliner pedas legendaris yang memuaskan lidah pecinta kuliner.",
+        "image_url": "/team-slide-dome.jpg",
+        "tag": "Tim Kuliner",
+        "sort_order": 3,
+        "is_active": 1
+      }
+    ],
+    "vinas_section": [
+      {
+        "id": "vinas_main",
+        "title": "Vina's Signature Recipe",
+        "subtitle": "Kisah Rasa di Balik Kelezatan Pedas Mie Jebew",
+        "quote": "Pedas itu bukan sekadar membakar lidah, tetapi sebuah harmoni antara gurihnya rempah nusantara dan kehangatan rasa yang membekas di hati.",
+        "description": "Resep Mie Jebew lahir dari eksperimen dapur rumah oleh Vina, memadukan tradisi mie nusantara dengan sambal chili oil aromatik yang kaya rasa. Setiap bumbu dan racikan minyak diracik secara personal untuk memastikan kenikmatan rasa yang otentik dan tak terlupakan.",
+        "image_url": "/team-cravecorner.jpg",
+        "cta_text": "Coba Resep Vina",
+        "cta_link": "#menu",
+        "badge": "Founder's Signature",
+        "is_active": 1,
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "social_links": [
+      {
+        "id": "soc-1",
+        "platform": "Instagram",
+        "handle": "@cravecorner0",
+        "url": "https://www.instagram.com/cravecorner0?stkn=MTJ2OXpnMnAwZDNxNQ==",
+        "icon": "InstagramIcon",
+        "is_active": 1,
+        "sort_order": 1
+      },
+      {
+        "id": "soc-2",
+        "platform": "WhatsApp",
+        "handle": "+62 851-2201-4573",
+        "url": "https://wa.me/6285122014573",
+        "icon": "Phone",
+        "is_active": 1,
+        "sort_order": 2
+      },
+      {
+        "id": "soc-3",
+        "platform": "TikTok",
+        "handle": "@miejebew_official",
+        "url": "https://tiktok.com/@miejebew_official",
+        "icon": "Sparkles",
+        "is_active": 1,
+        "sort_order": 3
+      }
+    ],
+    "contact_information": [
+      {
+        "id": "main_contact",
+        "phone": "+62 851-2201-4573",
+        "whatsapp_number": "6285122014573",
+        "whatsapp_display": "+62 851-2201-4573",
+        "email": "kontak@miejebew.com",
+        "address_note": "Pemesanan Online / Delivery & Outlet",
+        "address_description": "Pesanan diantar langsung ke alamat tujuanmu via konfirmasi WhatsApp atau ambil di outlet.",
+        "opening_hours": "Setiap Hari (Senin - Minggu) 10:00 - 22:00 WIB",
+        "google_maps_url": "https://maps.google.com",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "homepage_content": [
+      {
+        "id": "hero_content",
+        "store_name": "Mie Jebew Official",
+        "hero_headline": "MIE JEBEW",
+        "hero_subheadline": "PEDASNYA BIKIN JEBEW! 🌶️",
+        "hero_description": "Sensasi mie kenyal bertabur ayam cincang gurih dengan siraman chili oil pedas nampol level 0 sampai 5! Tanpa ribet login, pesan langsung lewat WhatsApp dalam hitungan detik.",
+        "hero_badge": "BEST SELLER — 100% CABAI ASLI",
+        "cta_order_text": "🔥 PESAN SEKARANG",
+        "cta_menu_text": "LIHAT MENU",
+        "announcement_banner": "🎉 Diskon 15% untuk Pemesanan Pertama! Gunakan kode: JEBEWBARU",
+        "is_announcement_active": 1,
+        "video_banner_url": "/vedio baner/zajiZMil.mp4",
+        "video_poster_url": "/video-poster.jpg",
+        "qris_merchant_name": "CRAVE CORNER",
+        "qris_nmid": "ID1026566705020",
+        "qris_image_url": "/qris/Qris.jpeg",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "media": [],
+    "orders": [],
+    "order_items": [],
+    "customer_users": [],
+    "coin_transactions": [],
+    "spin_history": [],
+    "vouchers": [],
+    "system_settings": [
+      {
+        "setting_key": "maintenance_mode",
+        "setting_value": "{\"isEnabled\":false,\"mode\":\"read_only\",\"title\":\"Website Ini Sedang Melakukan Pemeliharaan\",\"message\":\"Kami sedang melakukan perbaikan sementara, silakan kembali beberapa saat lagi.\",\"updatedBy\":\"admin\",\"updatedAt\":\"2026-10-11T12:18:26.287Z\"}",
+        "updated_by": "admin",
+        "updated_at": "2026-10-11T12:18:26.287Z"
+      }
+    ]
+  }
+}

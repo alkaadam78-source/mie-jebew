@@ -1,0 +1,17 @@
+{
+  "name": "Mie Jebew Official",
+  "short_name": "Mie Jebew",
+  "description": "Pesan Mie Jebew favoritmu langsung dari smartphone via WhatsApp!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF5",
+  "theme_color": "#DC2626",
+  "icons": [
+    {
+      "src": "/logo/Logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

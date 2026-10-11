@@ -1,0 +1,283 @@
+import { SpiceOption, Topping, MenuItem, PromoBundle, StoreReview, InstagramPost } from '../types';
+
+export const SPICE_LEVELS: SpiceOption[] = [
+  {
+    level: 0,
+    name: 'Level 0 — Gak Pedas',
+    badge: '👶 Safe Mode',
+    description: 'Gurih manis gurih tanpa cabe, cocok untuk yang tidak tahan pedas.',
+  },
+  {
+    level: 1,
+    name: 'Level 1 — Sedang',
+    badge: '🌶️ Anget Manja',
+    description: 'Pedas tipis-tipis menggugah selera, rasa bumbu tetap dominan.',
+  },
+  {
+    level: 2,
+    name: 'Level 2 — Pedas',
+    badge: '🌶️🌶️ Mulai Nendang',
+    description: 'Pedas mantap yang bikin keringat mulai menetes!',
+  },
+  {
+    level: 3,
+    name: 'Level 3 — Super Pedas',
+    badge: '🔥 Best Seller',
+    description: 'Level paling favorit! Pedas nampol khas jebew yang nagih abis.',
+  },
+  {
+    level: 4,
+    name: 'Level 4 — Ekstra Pedas',
+    badge: '🔥🔥 Keringat Dingin',
+    description: 'Cabe melimpah ruah, siap-siap lidah terbakar & butuh es teh jumbo!',
+  },
+  {
+    level: 5,
+    name: 'Level 5 — Jebew Maksimal',
+    badge: '☠️ Neraka Jebew',
+    description: 'Sensasi bibir jebew bergetar! Hanya untuk pendekar cabe sejati!',
+  },
+];
+
+export const TOPPINGS: Topping[] = [
+  { id: 'top-1', name: 'Pangsit Goreng Renyah (2 pcs)', price: 2000, popular: true },
+  { id: 'top-2', name: 'Bakso Sapi Kenyal (2 pcs)', price: 3000, popular: true },
+  { id: 'top-3', name: 'Telur Mata Sapi / Ceplok', price: 3000 },
+  { id: 'top-4', name: 'Ayam Tabur Ekstra Melimpah', price: 3000, popular: true },
+  { id: 'top-5', name: 'Keju Mozarella Melt', price: 3000 },
+  { id: 'top-6', name: 'Ekstra Bumbu Chili Oil', price: 2000 },
+];
+
+export const MENU_ITEMS: MenuItem[] = [
+  // MIE (SERBA 10 RIBU)
+  {
+    id: 'mie-1',
+    name: 'Mie Jebew Original',
+    category: 'mie',
+    price: 10000,
+    description: 'Mie kenyal pedas khas Jebew dengan bumbu rahasia gurih pedas nampol, taburan ayam melimpah, pangsit renyah, dan bakso lezat!',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🔥 SERBA 10K',
+    isSpicySelectable: true,
+    isPopular: true,
+    isBestSeller: true,
+  },
+  {
+    id: 'mie-2',
+    name: 'Mie Jebew Kuah Pedas',
+    category: 'mie',
+    price: 10000,
+    description: 'Mie kuah kaldu berpadu bumbu rempah cabai pedas berkuah hangat yang bikin keringat bercucuran!',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🌶️ KUAH 10K',
+    isSpicySelectable: true,
+    isPopular: true,
+  },
+  {
+    id: 'mie-3',
+    name: 'Mie Jebew Manis Gurih',
+    category: 'mie',
+    price: 10000,
+    description: 'Kombinasi bumbu kecap manis racikan spesial dan chili oil pedas nampol khas nusantara.',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🍯 MANIS GURIH 10K',
+    isSpicySelectable: true,
+  },
+  {
+    id: 'mie-4',
+    name: 'Mie Jebew Spesial Keju',
+    category: 'mie',
+    price: 10000,
+    description: 'Sensasi pedas jebew berpadu gurihnya saus keju lumer yang nikmat dan creamy!',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🧀 CHEESE 10K',
+    isSpicySelectable: true,
+    isPopular: true,
+  },
+  {
+    id: 'mie-5',
+    name: 'Mie Jebew Chili Oil Ekstra',
+    category: 'mie',
+    price: 10000,
+    description: 'Porsi mie kenyal disiram minyak cabai rawit merah segar dengan aroma rempah bawang aromatik.',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🔥 EXTRA CHILI 10K',
+    isSpicySelectable: true,
+  },
+
+  // PAKET (SERBA 10 RIBU - TIDAK LEBIH DARI 10K)
+  {
+    id: 'paket-1',
+    name: 'Paket Hemat Pelajar 10K',
+    category: 'paket',
+    price: 10000,
+    originalPrice: 13000,
+    description: 'Paket super hemat: 1x Mie Jebew Original (Level 0-5) + 1x Es Teh Manis Segar. Pas di kantong!',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '⭐ COMBO 10K',
+    isSpicySelectable: true,
+    isPopular: true,
+    isBestSeller: true,
+  },
+  {
+    id: 'paket-2',
+    name: 'Paket Puas Kriuk 10K',
+    category: 'paket',
+    price: 10000,
+    originalPrice: 12000,
+    description: 'Kombinasi 1x Mie Jebew favorit + 1x Pangsit Goreng Kriuk Renyah. Kenyang maksimal!',
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🥟 PUAS 10K',
+    isSpicySelectable: true,
+  },
+
+  // TOPPING & SIDE (DI BAWAH / MAKSIMAL 10 RIBU)
+  {
+    id: 'side-1',
+    name: 'Pangsit Goreng Renyah (3 pcs)',
+    category: 'topping',
+    price: 4000,
+    description: 'Pangsit goreng isi ayam gurih super kriuk, teman setia mie jebew!',
+    image: '',
+    badge: '🥟 KRIUK GURIH',
+    isSpicySelectable: false,
+  },
+  {
+    id: 'side-2',
+    name: 'Bakso Sapi Kenyal (3 pcs)',
+    category: 'topping',
+    price: 5000,
+    description: 'Bakso sapi lezat daging pilihan dengan tekstur kenyal gurih.',
+    image: '',
+    badge: '🥩 BAKSO SAPI',
+    isSpicySelectable: false,
+  },
+  {
+    id: 'side-3',
+    name: 'Keripik Pangsit Pedas Jebew',
+    category: 'topping',
+    price: 5000,
+    description: 'Keripik pangsit renyah dengan taburan bumbu cabai pedas asin gurih.',
+    image: '',
+    badge: '🌶️ SNACK PEDAS',
+    isSpicySelectable: false,
+  },
+
+  // MINUMAN (DI BAWAH 10 RIBU)
+  {
+    id: 'minuman-1',
+    name: 'Es Teh Manis Jumbo',
+    category: 'minuman',
+    price: 4000,
+    description: 'Es teh manis segar ukuran jumbo penyelamat lidah terbakar dari pedasnya jebew!',
+    image: '',
+    badge: '🧊 SEGAR JUMBO',
+    isSpicySelectable: false,
+    isPopular: true,
+  },
+  {
+    id: 'minuman-2',
+    name: 'Es Jeruk Peras Segar',
+    category: 'minuman',
+    price: 5000,
+    description: 'Perasan jeruk asli segar dingin penawar dahaga dan pereda pedas.',
+    image: '',
+    badge: '🍊 JERUK ASLI',
+    isSpicySelectable: false,
+  },
+  {
+    id: 'minuman-3',
+    name: 'Air Mineral Dingin',
+    category: 'minuman',
+    price: 3000,
+    description: 'Air mineral dingin higienis siap basmi rasa pedas di tenggorokan.',
+    image: '',
+    badge: '💧 DINGIN SEGAR',
+    isSpicySelectable: false,
+  },
+];
+
+export const PROMO_BUNDLES: PromoBundle[] = [
+  {
+    id: 'promo-1',
+    title: '🔥 PAKET COMBO SERBA 10K',
+    tagline: 'Kenyang puas gak bikin dompet tipis — Cuma Rp 10.000!',
+    originalPrice: 14000,
+    promoPrice: 10000,
+    savings: 4000,
+    items: [
+      '1x Mie Jebew Original (Bebas Pilih Level 0-5)',
+      '1x Es Teh Manis Segar',
+      '1x Pangsit Goreng Kriuk',
+    ],
+    image: '/rasa-mie/Original.jpeg',
+    badge: '🔥 SERBA 10K',
+    isActive: true,
+  },
+];
+
+export const CUSTOMER_REVIEWS: StoreReview[] = [
+  {
+    id: 'rev-1',
+    name: 'Siti Rahmawati',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    date: '2 hari lalu',
+    comment: 'Level 3 beneran gokil pedasnya! Bumbu chili oil-nya wangi banget. Order via WhatsApp langsung diproses admin!',
+    favoriteItem: 'Mie Jebew Level 3 🔥',
+  },
+  {
+    id: 'rev-2',
+    name: 'Dimas Prasetyo',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    date: '3 hari lalu',
+    comment: 'Porsi mantap banget, pedasnya juara bukan kaleng-kaleng! Recommended buat pencinta pedas.',
+    favoriteItem: 'Paket Sultan Jebew',
+  },
+  {
+    id: 'rev-3',
+    name: 'Nadia Putri',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
+    date: '1 minggu lalu',
+    comment: 'Beneran bikin bibir jebew tapi nagih parah! Kuahnya gurih kental berbumbu mantap!',
+    favoriteItem: 'Mie Jebew Kuah Merah',
+  },
+  {
+    id: 'rev-4',
+    name: 'Reza Fauzi',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    date: '1 minggu lalu',
+    comment: 'Websitenya gampang banget dipake di HP, tinggal pilih level pedas langsung connect ke WA admin.',
+    favoriteItem: 'Mie Jebew Yamin',
+  },
+];
+
+export const INSTAGRAM_POSTS: InstagramPost[] = [
+  {
+    id: 'ig-team',
+    imageUrl: '/team-slide-faces.jpg',
+    images: [
+      '/team-slide-faces.jpg',
+      '/team-cravecorner.jpg',
+      '/team-slide-dome.jpg',
+    ],
+    caption: '👥 Anggota Tim Crave Corner Group! Kompak selalu di balik dapur Mie Jebew 🔥',
+    likes: 1890,
+    url: 'https://www.instagram.com/p/DcvxYG1kyvM/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==',
+  },
+  {
+    id: 'ig-teaser',
+    imageUrl: '/teaser-slide-top.jpg',
+    images: [
+      '/teaser-slide-top.jpg',
+      '/teaser-comingsoon.jpg',
+      '/teaser-slide-receipt.jpg',
+    ],
+    caption: '⏳ TEASER COMING SOON! Sesuatu yang spesial sedang dipersiapkan... Stay tuned! 🌶️👀',
+    likes: 2450,
+    url: 'https://www.instagram.com/p/DdJZkbSTZgu/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==',
+  },
+];
