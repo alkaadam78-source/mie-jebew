@@ -28,6 +28,7 @@ import { scheduledTasksRouter } from './routes/scheduledTasks';
 import { featureFlagsRouter } from './routes/featureFlags';
 import { reportsExportRouter } from './routes/reportsExport';
 import { customersAdminRouter } from './routes/customersAdmin';
+import { promotionalPopupRouter } from './routes/promotionalPopup';
 import { initScheduledBackup } from './services/backupService';
 import { recordRequestMetric } from './services/healthMonitorService';
 
@@ -94,6 +95,7 @@ app.use('/api/admin/features', featureFlagsRouter);
 app.use('/api/features', featureFlagsRouter);
 app.use('/api/admin/export', reportsExportRouter);
 app.use('/api/admin/customers', customersAdminRouter);
+app.use('/api', promotionalPopupRouter);
 
 
 

@@ -13,7 +13,7 @@ import {
   BundleItem,
   CustomOptionItem,
 } from '../types';
-import { fetchPublicBootstrap } from '../services/api';
+import { fetchPublicBootstrap, publicDataChannel } from '../services/api';
 import { STORE_CONFIG } from '../config/store';
 import { MENU_ITEMS } from '../data/menu';
 
@@ -234,16 +234,32 @@ export const PublicDataProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   useEffect(() => {
     loadData();
 
-    // Revalidate data periodically (every 30 seconds) or when window regains focus
-    const interval = setInterval(loadData, 30000);
-    const handleFocus = () => {
+    const handleBroadcast = (event: MessageEvent) => {
+      if (event.data?.type === 'REFRESH') {
+        loadData();
+      }
+    };
+
+    const handleLocalRefresh = () => {
       loadData();
     };
-    window.addEventListener('focus', handleFocus);
+
+    if (publicDataChannel) {
+      publicDataChannel.addEventListener('message', handleBroadcast);
+    }
+    window.addEventListener('public-data:refresh', handleLocalRefresh);
+    window.addEventListener('focus', handleLocalRefresh);
+
+    // Dynamic sync every 5 seconds
+    const interval = setInterval(loadData, 5000);
 
     return () => {
+      if (publicDataChannel) {
+        publicDataChannel.removeEventListener('message', handleBroadcast);
+      }
+      window.removeEventListener('public-data:refresh', handleLocalRefresh);
+      window.removeEventListener('focus', handleLocalRefresh);
       clearInterval(interval);
-      window.removeEventListener('focus', handleFocus);
     };
   }, [loadData]);
 

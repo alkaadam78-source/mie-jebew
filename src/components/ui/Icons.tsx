@@ -1281,3 +1281,9 @@ export const PrinterIcon: React.FC<IconProps> = ({ size = 24, className = 'w-6 h
   </svg>
 );
 
+
+export const Save = SaveIcon;
+export const RotateCcw = RefreshCw;
+export const Eye = Search;
+export const AlertTriangle = AlertCircle;
+export const Calendar = Clock;

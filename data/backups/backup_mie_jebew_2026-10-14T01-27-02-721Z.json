@@ -1,0 +1,1220 @@
+{
+  "meta": {
+    "backupId": "bkp_1791941222722_jdbuc",
+    "version": "1.0",
+    "createdAt": "2026-10-14T01:27:02.742Z",
+    "backupType": "auto_daily",
+    "createdBy": "admin",
+    "notes": "Dijalankan via Scheduled Task Monitor",
+    "totalTables": 28,
+    "totalRecords": 99
+  },
+  "data": {
+    "admin_users": [
+      {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@miejebew.com",
+        "password_hash": "$2b$10$SIo1Pex1uJ3/g9FIMCQAf.7X5uOV7/XiQdOy1vMpNHCaYDFrX/E.O",
+        "role": "SUPER_ADMIN",
+        "name": "Adam",
+        "is_active": 1,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z",
+        "phone": "085122014584"
+      }
+    ],
+    "categories": [
+      {
+        "id": "all",
+        "name": "Semua Menu",
+        "slug": "all",
+        "icon": "✨",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "mie",
+        "name": "Mie Jebew",
+        "slug": "mie",
+        "icon": "🍜",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "paket",
+        "name": "Paket Hemat",
+        "slug": "paket",
+        "icon": "🔥",
+        "sort_order": 3,
+        "is_active": 1
+      },
+      {
+        "id": "topping",
+        "name": "Topping & Side",
+        "slug": "topping",
+        "icon": "🥚",
+        "sort_order": 4,
+        "is_active": 1
+      },
+      {
+        "id": "minuman",
+        "name": "Minuman Segar",
+        "slug": "minuman",
+        "icon": "🥤",
+        "sort_order": 5,
+        "is_active": 1
+      }
+    ],
+    "menu_items": [
+      {
+        "id": "mie-1",
+        "name": "Mie Jebew Original",
+        "category_id": "mie",
+        "price": 10000,
+        "sale_price": null,
+        "description": "Mie kenyal pedas khas Jebew dengan bumbu rahasia gurih pedas nampol, taburan ayam melimpah, pangsit renyah, dan bakso lezat!",
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🔥 SERBA 10K",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 1,
+        "is_active": 1,
+        "sort_order": 1,
+        "ingredients": "Mie kenyal, chili oil khas Jebew, ayam cincang gurih, pangsit goreng, daun bawang",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T13:18:58.028Z"
+      },
+      {
+        "id": "mie-2",
+        "name": "???",
+        "category_id": "mie",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep! Nantikan sensasi spesial segera dari dapur Crave Corner.",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 2,
+        "ingredients": "Mie telur, kaldu ayam gurih, bumbu jebew pedas, bakso, sayuran segar",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-14T01:25:41.576Z"
+      },
+      {
+        "id": "mie-3",
+        "name": "???",
+        "category_id": "mie",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep dapur Crave Corner!",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 1,
+        "is_popular": 0,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 3,
+        "ingredients": "Mie, kecap manis racikan, cabai rawit pedas, ayam cincang, pangsit",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "mie-4",
+        "name": "???",
+        "category_id": "mie",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep dapur Crave Corner!",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 4,
+        "ingredients": "Mie jebew, lelehan keju mozarella & keju cheddar gurih, taburan ayam",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "paket-1",
+        "name": "???",
+        "category_id": "paket",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep dapur Crave Corner!",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 1,
+        "is_popular": 1,
+        "is_best_seller": 1,
+        "is_active": 1,
+        "sort_order": 5,
+        "ingredients": "1 Porsi Mie Jebew, 1 Es Teh Jumbo",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "topping-1",
+        "name": "???",
+        "category_id": "topping",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep dapur Crave Corner!",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 0,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 6,
+        "ingredients": "Kulit pangsit renyah, daging ayam cincang olahan",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "minuman-1",
+        "name": "???",
+        "category_id": "minuman",
+        "price": 0,
+        "sale_price": null,
+        "description": "Menu rahasia dalam pengembangan resep dapur Crave Corner!",
+        "image": "",
+        "badge": "❓ SEGERA HADIR",
+        "is_spicy_selectable": 0,
+        "is_popular": 1,
+        "is_best_seller": 0,
+        "is_active": 1,
+        "sort_order": 7,
+        "ingredients": "Teh melati seduh, gula murni, es batu higienis",
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "products_bottles": [
+      {
+        "id": "bot-1",
+        "name": "Chili Oil Jebew Mini Jar (100ml)",
+        "subtitle": "Bumbu Minyak Cabai Pedas Gurih Siap Saji",
+        "price": 0,
+        "volume_ml": 100,
+        "description": "Chili oil racikan rahasia khas Mie Jebew dengan cabai rawit merah segar, bawang putih goreng, dan rempah aromatik pilihan.",
+        "heat_level": 4,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "🔥 SERBA 10K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-14T01:26:21.102Z"
+      },
+      {
+        "id": "bot-2",
+        "name": "Sambal Jebew Extra Hot Cup (100ml)",
+        "subtitle": "Pedas Nampol Menggelegar untuk Segala Makanan",
+        "price": 0,
+        "volume_ml": 100,
+        "description": "Sambal ulek khas jebew dengan tingkat kepedasan maksimal. Cocok untuk cocolan gorengan, nasi hangat, mie instan, dan lauk!",
+        "heat_level": 5,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "☠️ SERBA 10K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-14T01:26:21.679Z"
+      },
+      {
+        "id": "bot-3",
+        "name": "Bumbu Mie Jebew Sachet Praktis",
+        "subtitle": "Bikin Mie Jebew Sendiri di Rumah",
+        "price": 0,
+        "volume_ml": 80,
+        "description": "Paket bumbu sachet komplit khas jebew, cukup aduk dengan mie rebus instan favoritmu dan rasakan sensasi jebew asli!",
+        "heat_level": 3,
+        "image": "/rasa-mie/Original.jpeg",
+        "badge": "✨ HEMAT 8K",
+        "stock_status": "in_stock",
+        "is_active": 1,
+        "sort_order": 3,
+        "created_at": "2026-10-11T12:15:54.945Z",
+        "updated_at": "2026-10-14T01:26:22.341Z"
+      }
+    ],
+    "custom_order_options": [
+      {
+        "id": "sp-0",
+        "group_type": "spice_level",
+        "name": "Level 0 — Gak Pedas",
+        "level_number": 0,
+        "badge": "👶 Safe Mode",
+        "description": "Gurih manis gurih tanpa cabe",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 1
+      },
+      {
+        "id": "sp-1",
+        "group_type": "spice_level",
+        "name": "Level 1 — Sedang",
+        "level_number": 1,
+        "badge": "🌶️ Anget Manja",
+        "description": "Pedas tipis-tipis menggugah selera",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 2
+      },
+      {
+        "id": "sp-2",
+        "group_type": "spice_level",
+        "name": "Level 2 — Pedas",
+        "level_number": 2,
+        "badge": "🌶️🌶️ Mulai Nendang",
+        "description": "Pedas mantap yang bikin keringat bercucuran",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 3
+      },
+      {
+        "id": "sp-3",
+        "group_type": "spice_level",
+        "name": "Level 3 — Super Pedas",
+        "level_number": 3,
+        "badge": "🔥 Best Seller",
+        "description": "Level paling favorit nagih abis!",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 4
+      },
+      {
+        "id": "sp-4",
+        "group_type": "spice_level",
+        "name": "Level 4 — Ekstra Pedas",
+        "level_number": 4,
+        "badge": "🔥🔥 Keringat Dingin",
+        "description": "Cabe melimpah ruah lidah terbakar",
+        "price_adjustment": 0,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 5
+      },
+      {
+        "id": "sp-5",
+        "group_type": "spice_level",
+        "name": "Level 5 — Jebew Maksimal",
+        "level_number": 5,
+        "badge": "☠️ Neraka Jebew",
+        "description": "Sensasi bibir jebew bergetar!",
+        "price_adjustment": 0,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 6
+      },
+      {
+        "id": "top-1",
+        "group_type": "topping",
+        "name": "Pangsit Goreng Renyah (2 pcs)",
+        "level_number": null,
+        "badge": "🥟 Ekstra Kriuk",
+        "description": "Pangsit renyah gurih",
+        "price_adjustment": 2000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 7
+      },
+      {
+        "id": "top-2",
+        "group_type": "topping",
+        "name": "Bakso Sapi Kenyal (2 pcs)",
+        "level_number": null,
+        "badge": "🥩 Daging Asli",
+        "description": "Bakso sapi lezat",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 8
+      },
+      {
+        "id": "top-3",
+        "group_type": "topping",
+        "name": "Telur Mata Sapi / Ceplok",
+        "level_number": null,
+        "badge": "🍳 Tambah Gurih",
+        "description": "Telur ayam segar matang/setengah matang",
+        "price_adjustment": 3000,
+        "is_popular": 0,
+        "is_active": 1,
+        "sort_order": 9
+      },
+      {
+        "id": "top-4",
+        "group_type": "topping",
+        "name": "Ayam Tabur Melimpah",
+        "level_number": null,
+        "badge": "🍗 Ekstra Daging",
+        "description": "Porsi daging ayam gurih dobel",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 10
+      },
+      {
+        "id": "top-5",
+        "group_type": "topping",
+        "name": "Keju Mozarella Melt",
+        "level_number": null,
+        "badge": "🧀 Lumer Mewah",
+        "description": "Keju leleh hangat",
+        "price_adjustment": 3000,
+        "is_popular": 1,
+        "is_active": 1,
+        "sort_order": 11
+      }
+    ],
+    "bundles": [
+      {
+        "id": "bun-1",
+        "name": "Paket Combo Serba 10K",
+        "description": "1 Porsi Mie Jebew Level Bebas + 1 Es Teh Manis Jumbo + 1 Porsi Pangsit Renyah!",
+        "price": 10000,
+        "original_price": 14000,
+        "savings_badge": "HEMAT Rp4.000",
+        "items_included": "[\"1x Mie Jebew\",\"1x Es Teh Jumbo\",\"1x Pangsit Renyah\"]",
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "bun-2",
+        "name": "Paket Puas Dobel Topping 10K",
+        "description": "1 Porsi Mie Jebew Pedas Gurih + Pangsit Renyah + Bakso Sapi!",
+        "price": 10000,
+        "original_price": 13000,
+        "savings_badge": "SERBA 10K",
+        "items_included": "[\"1x Mie Jebew\",\"1x Pangsit Renyah\",\"1x Bakso Sapi\"]",
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "promotions": [
+      {
+        "id": "pro-1",
+        "title": "Promo Diskon Pengguna Baru",
+        "promo_code": "JEBEWBARU",
+        "description": "Dapatkan potongan 15% untuk pemesanan pertamamu via WhatsApp!",
+        "discount_type": "percentage",
+        "discount_value": 15,
+        "min_purchase": 25000,
+        "start_date": "2026-01-01",
+        "end_date": "2026-12-31",
+        "usage_limit": 1000,
+        "used_count": 0,
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 1,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      },
+      {
+        "id": "pro-2",
+        "title": "Potongan Langsung Rp5.000",
+        "promo_code": "HEMAT5RB",
+        "description": "Potongan Rp5.000 untuk minimal belanja Rp30.000",
+        "discount_type": "fixed",
+        "discount_value": 5000,
+        "min_purchase": 30000,
+        "start_date": "2026-01-01",
+        "end_date": "2026-12-31",
+        "usage_limit": 500,
+        "used_count": 0,
+        "image": "/rasa-mie/Original.jpeg",
+        "is_active": 1,
+        "sort_order": 2,
+        "created_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "why_choose_us": [
+      {
+        "id": "w-1",
+        "title": "100% Cabai Asli Pilihan",
+        "description": "Kami hanya menggunakan cabai rawit segar langsung dari petani, tanpa bubuk cabai buatan atau pengawet berbahaya.",
+        "icon": "🌶️",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "w-2",
+        "title": "Bumbu Chili Oil Racikan Rahasia",
+        "description": "Minyak cabai dimasak perlahan (slow-cooked) selama 4 jam dengan rempah aromatik agar cita rasa gurih dan wanginya meresap sempurna.",
+        "icon": "🔥",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "w-3",
+        "title": "Higienis & Selalu Dibuat Fresh",
+        "description": "Setiap pesanan direbus dan diracik dadakan saat dipesan sehingga mie tetap kenyal dan disajikan hangat panas.",
+        "icon": "✨",
+        "sort_order": 3,
+        "is_active": 1
+      },
+      {
+        "id": "w-4",
+        "title": "Pesan Kilat Tanpa Antre",
+        "description": "Pesan praktis langsung via WhatsApp smartphone, tanpa repot daftar akun panjang atau install aplikasi tambahan.",
+        "icon": "⚡",
+        "sort_order": 4,
+        "is_active": 1
+      }
+    ],
+    "behind_the_kitchen": [
+      {
+        "id": "k-1",
+        "title": "Proses Perebusan & Racikan Cabai Segar",
+        "description": "Setiap helai mie direbus dengan ketepatan suhu air agar mendapatkan tekstur kenyal sempurna khas Jebew.",
+        "image_url": "/team-cravecorner.jpg",
+        "tag": "Dapur Jebew",
+        "sort_order": 1,
+        "is_active": 1
+      },
+      {
+        "id": "k-2",
+        "title": "Penyajian Topping Ayam & Pangsit Renyah",
+        "description": "Daging ayam cincang gurih ditaburkan dengan royal di atas setiap mangkok mie jebew panas.",
+        "image_url": "/team-slide-faces.jpg",
+        "tag": "Kualitas Bahan",
+        "sort_order": 2,
+        "is_active": 1
+      },
+      {
+        "id": "k-3",
+        "title": "Tim Crave Corner yang Penuh Semangat",
+        "description": "Dedikasi tinggi dari seluruh tim untuk menghadirkan kuliner pedas legendaris yang memuaskan lidah pecinta kuliner.",
+        "image_url": "/team-slide-dome.jpg",
+        "tag": "Tim Kuliner",
+        "sort_order": 3,
+        "is_active": 1
+      }
+    ],
+    "vinas_section": [
+      {
+        "id": "vinas_main",
+        "title": "Vina's Signature Recipe",
+        "subtitle": "Kisah Rasa di Balik Kelezatan Pedas Mie Jebew",
+        "quote": "Pedas itu bukan sekadar membakar lidah, tetapi sebuah harmoni antara gurihnya rempah nusantara dan kehangatan rasa yang membekas di hati.",
+        "description": "Resep Mie Jebew lahir dari eksperimen dapur rumah oleh Vina, memadukan tradisi mie nusantara dengan sambal chili oil aromatik yang kaya rasa. Setiap bumbu dan racikan minyak diracik secara personal untuk memastikan kenikmatan rasa yang otentik dan tak terlupakan.",
+        "image_url": "/team-cravecorner.jpg",
+        "cta_text": "Coba Resep Vina",
+        "cta_link": "#menu",
+        "badge": "Founder's Signature",
+        "is_active": 1,
+        "updated_at": "2026-10-11T12:15:54.945Z"
+      }
+    ],
+    "social_links": [
+      {
+        "id": "soc-1",
+        "platform": "Instagram",
+        "handle": "@cravecorner0",
+        "url": "https://www.instagram.com/cravecorner0?stkn=MTJ2OXpnMnAwZDNxNQ==",
+        "icon": "InstagramIcon",
+        "is_active": 1,
+        "sort_order": 1
+      },
+      {
+        "id": "soc-2",
+        "platform": "WhatsApp",
+        "handle": "+62 851-2201-4573",
+        "url": "https://wa.me/6285122014573",
+        "icon": "Phone",
+        "is_active": 1,
+        "sort_order": 2
+      },
+      {
+        "id": "soc-3",
+        "platform": "TikTok",
+        "handle": "@miejebew_official",
+        "url": "https://tiktok.com/@miejebew_official",
+        "icon": "Sparkles",
+        "is_active": 1,
+        "sort_order": 3
+      }
+    ],
+    "contact_information": [
+      {
+        "id": "main_contact",
+        "phone": "+62 851-2201-4573",
+        "whatsapp_number": "6285122014573",
+        "whatsapp_display": "+62 851-2201-4573",
+        "email": "kontak@miejebew.com",
+        "address_note": "Pemesanan Online / Delivery & Outlet",
+        "address_description": "Pesanan diantar langsung ke alamat tujuanmu via konfirmasi WhatsApp atau ambil di outlet.",
+        "opening_hours": "Setiap Hari (Senin - Minggu) 10:00 - 23:00 WIB",
+        "google_maps_url": "https://maps.google.com",
+        "updated_at": "2026-10-11T12:51:46.609Z"
+      }
+    ],
+    "homepage_content": [
+      {
+        "id": "hero_content",
+        "store_name": "Mie Jebew Official",
+        "hero_headline": "MIE JEBEW SPESIAL BOGOR 🔥",
+        "hero_subheadline": "PEDASNYA BIKIN JEBEW! 🌶️",
+        "hero_description": "Sensasi mie kenyal bertabur ayam cincang gurih dengan siraman chili oil pedas nampol level 0 sampai 5! Tanpa ribet login, pesan langsung lewat WhatsApp dalam hitungan detik.",
+        "hero_badge": "BEST SELLER — 100% CABAI ASLI",
+        "cta_order_text": "🔥 PESAN SEKARANG",
+        "cta_menu_text": "LIHAT MENU",
+        "announcement_banner": "🎉 DISKON SPESIAL HARI INI: SERBA 10 RIBU!",
+        "is_announcement_active": 1,
+        "video_banner_url": "/vedio baner/zajiZMil.mp4",
+        "video_poster_url": "/video-poster.jpg",
+        "qris_merchant_name": "CRAVE CORNER",
+        "qris_nmid": "ID1026566705020",
+        "qris_image_url": "/qris/Qris.jpeg",
+        "updated_at": "2026-10-11T13:18:58.039Z"
+      }
+    ],
+    "media": [],
+    "orders": [
+      {
+        "id": "ORD-1791728429818-1047",
+        "customer_name": "Upin",
+        "customer_phone": "6285780753053",
+        "order_type": "delivery",
+        "table_number": null,
+        "address": "Jj",
+        "payment_method": "cash",
+        "payment_status": "pending",
+        "subtotal": 90000,
+        "discount_amount": 0,
+        "voucher_code": null,
+        "total_amount": 90000,
+        "additional_notes": "Hhh",
+        "order_status": "pending",
+        "created_at": "2026-10-11T14:20:30.081Z",
+        "updated_at": "2026-10-11T14:20:30.081Z"
+      },
+      {
+        "id": "ORD-1791937311987-6415",
+        "customer_name": "adam",
+        "customer_phone": "6285122014584",
+        "order_type": "dine_in",
+        "table_number": "98",
+        "address": null,
+        "payment_method": "qris",
+        "payment_status": "paid",
+        "subtotal": 20000,
+        "discount_amount": 0,
+        "voucher_code": null,
+        "total_amount": 20000,
+        "additional_notes": null,
+        "order_status": "paid",
+        "created_at": "2026-10-14T00:21:52.012Z",
+        "updated_at": "2026-10-14T00:21:52.012Z"
+      }
+    ],
+    "order_items": [
+      {
+        "id": 1,
+        "order_id": "ORD-1791728429818-1047",
+        "menu_item_id": "mie-3",
+        "item_name": "Mie Jebew Manis Gurih",
+        "quantity": 9,
+        "spice_level": 3,
+        "toppings_summary": "",
+        "unit_price": 10000,
+        "subtotal_item": 90000,
+        "notes": null
+      },
+      {
+        "id": 2,
+        "order_id": "ORD-1791937311987-6415",
+        "menu_item_id": "mie-1",
+        "item_name": "Mie Jebew Original",
+        "quantity": 2,
+        "spice_level": 3,
+        "toppings_summary": "",
+        "unit_price": 10000,
+        "subtotal_item": 20000,
+        "notes": null
+      }
+    ],
+    "customer_users": [
+      {
+        "id": 1,
+        "phone": "6281216190001",
+        "name": "Ahmad Dahlan 1619",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-14",
+        "created_at": "2026-10-11T13:08:05.122Z",
+        "updated_at": "2026-10-14T00:13:28.460Z"
+      },
+      {
+        "id": 2,
+        "phone": "6281392130002",
+        "name": "Budi Prakoso 9213",
+        "coins_balance": 0,
+        "last_spin_wib_date": null,
+        "created_at": "2026-10-11T13:08:05.146Z",
+        "updated_at": "2026-10-11T13:08:05.146Z"
+      },
+      {
+        "id": 3,
+        "phone": "6281482070003",
+        "name": "Cici Paramida 8207",
+        "coins_balance": 0,
+        "last_spin_wib_date": null,
+        "created_at": "2026-10-11T13:08:05.237Z",
+        "updated_at": "2026-10-11T13:08:05.237Z"
+      },
+      {
+        "id": 4,
+        "phone": "6281295920001",
+        "name": "Ahmad Dahlan 9592",
+        "coins_balance": 4,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:09:47.732Z",
+        "updated_at": "2026-10-11T13:09:47.815Z"
+      },
+      {
+        "id": 5,
+        "phone": "6281315250002",
+        "name": "Budi Prakoso 1525",
+        "coins_balance": 4,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:09:47.766Z",
+        "updated_at": "2026-10-11T13:09:47.847Z"
+      },
+      {
+        "id": 6,
+        "phone": "6281440960003",
+        "name": "Cici Paramida 4096",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:09:47.883Z",
+        "updated_at": "2026-10-11T13:09:47.951Z"
+      },
+      {
+        "id": 7,
+        "phone": "6281243750001",
+        "name": "Ahmad Dahlan 4375",
+        "coins_balance": 32,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:11:19.009Z",
+        "updated_at": "2026-10-11T13:11:19.069Z"
+      },
+      {
+        "id": 8,
+        "phone": "6281390270002",
+        "name": "Budi Prakoso 9027",
+        "coins_balance": 4,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:11:19.034Z",
+        "updated_at": "2026-10-11T13:11:19.103Z"
+      },
+      {
+        "id": 9,
+        "phone": "6281438050003",
+        "name": "Cici Paramida 3805",
+        "coins_balance": 16,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:11:19.130Z",
+        "updated_at": "2026-10-11T13:11:19.173Z"
+      },
+      {
+        "id": 10,
+        "phone": "6285122014584",
+        "name": "adam",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-14",
+        "created_at": "2026-10-11 13:15:32",
+        "updated_at": "2026-10-14T00:46:51.536Z"
+      },
+      {
+        "id": 11,
+        "phone": "6281254300001",
+        "name": "Ahmad Dahlan 5430",
+        "coins_balance": 4,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:18:58.190Z",
+        "updated_at": "2026-10-11T13:18:58.259Z"
+      },
+      {
+        "id": 12,
+        "phone": "6281380520002",
+        "name": "Budi Prakoso 8052",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:18:58.221Z",
+        "updated_at": "2026-10-11T13:18:58.294Z"
+      },
+      {
+        "id": 13,
+        "phone": "6281411110003",
+        "name": "Cici Paramida 1111",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:18:58.322Z",
+        "updated_at": "2026-10-11T13:18:58.363Z"
+      },
+      {
+        "id": 14,
+        "phone": "6285122109084",
+        "name": "Max",
+        "coins_balance": 4,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T14:13:21.030Z",
+        "updated_at": "2026-10-11T14:13:26.589Z"
+      },
+      {
+        "id": 15,
+        "phone": "6285780753053",
+        "name": "Upin",
+        "coins_balance": 8,
+        "last_spin_wib_date": "2026-10-11",
+        "created_at": "2026-10-11T14:19:39.084Z",
+        "updated_at": "2026-10-11T14:19:43.615Z"
+      }
+    ],
+    "coin_transactions": [
+      {
+        "id": 1,
+        "user_id": 12,
+        "type": "spin_reward",
+        "amount": 4,
+        "balance_before": 0,
+        "balance_after": 4,
+        "description": "Hadiah Harian Roda Keberuntungan: +4 Koin",
+        "reference_id": "spin_2026-10-11",
+        "ip_address": "127.0.0.1",
+        "created_at": "2026-10-11T13:18:58.259Z"
+      },
+      {
+        "id": 2,
+        "user_id": 1,
+        "type": "spin_reward",
+        "amount": 4,
+        "balance_before": 0,
+        "balance_after": 4,
+        "description": "Hadiah Harian Roda Keberuntungan: +4 Koin",
+        "reference_id": "spin_2026-10-11",
+        "ip_address": "127.0.0.1",
+        "created_at": "2026-10-11T13:21:31.906Z"
+      },
+      {
+        "id": 3,
+        "user_id": 1,
+        "type": "spin_reward",
+        "amount": 4,
+        "balance_before": 4,
+        "balance_after": 8,
+        "description": "Hadiah Harian Roda Keberuntungan: +4 Koin",
+        "reference_id": "spin_2026-10-14",
+        "ip_address": "127.0.0.1",
+        "created_at": "2026-10-14T00:13:28.460Z"
+      }
+    ],
+    "spin_history": [
+      {
+        "id": 1,
+        "user_id": 12,
+        "user_identifier": "6281254300001",
+        "coins_won": 4,
+        "segment_label": "4 Koin",
+        "ip_address": "127.0.0.1",
+        "user_agent": "node",
+        "wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:18:58.259Z"
+      },
+      {
+        "id": 2,
+        "user_id": 1,
+        "user_identifier": "6285122014584",
+        "coins_won": 4,
+        "segment_label": "4 Koin",
+        "ip_address": "127.0.0.1",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "wib_date": "2026-10-11",
+        "created_at": "2026-10-11T13:21:31.906Z"
+      },
+      {
+        "id": 3,
+        "user_id": 1,
+        "user_identifier": "6285122014584",
+        "coins_won": 4,
+        "segment_label": "4 Koin",
+        "ip_address": "127.0.0.1",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+        "wib_date": "2026-10-14",
+        "created_at": "2026-10-14T00:13:28.460Z"
+      }
+    ],
+    "vouchers": [],
+    "system_settings": [
+      {
+        "setting_key": "maintenance_mode",
+        "setting_value": "{\"isEnabled\":false,\"mode\":\"full\",\"title\":\"Pemeliharaan Darurat Mie Jebew\",\"message\":\"Server sedang di-upgrade untuk meningkatkan performa.\",\"updatedBy\":\"admin\",\"updatedAt\":\"2026-10-11T13:18:58.170Z\"}",
+        "updated_by": "admin",
+        "updated_at": "2026-10-11T13:18:58.170Z"
+      },
+      {
+        "setting_key": "feature_spin_wheel_enabled",
+        "setting_value": "true",
+        "updated_by": "system",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "setting_key": "feature_rewards_coins_enabled",
+        "setting_value": "true",
+        "updated_by": "system",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "setting_key": "feature_voucher_redeem_enabled",
+        "setting_value": "true",
+        "updated_by": "system",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "setting_key": "feature_online_ordering_enabled",
+        "setting_value": "true",
+        "updated_by": "system",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "setting_key": "feature_entrance_gate_mandatory",
+        "setting_value": "true",
+        "updated_by": "system",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "setting_key": "spin_wheel_segments",
+        "setting_value": "[{\"index\":0,\"coins\":4,\"label\":\"4 Koin\",\"weight\":60,\"color\":\"#fde047\"},{\"index\":1,\"coins\":8,\"label\":\"8 Koin\",\"weight\":50,\"color\":\"#f97316\"},{\"index\":2,\"coins\":16,\"label\":\"16 Koin\",\"weight\":10,\"color\":\"#e11d48\"},{\"index\":3,\"coins\":4,\"label\":\"4 Koin\",\"weight\":60,\"color\":\"#fde047\"},{\"index\":4,\"coins\":8,\"label\":\"8 Koin\",\"weight\":50,\"color\":\"#f97316\"},{\"index\":5,\"coins\":32,\"label\":\"32 Koin\",\"weight\":3,\"color\":\"#8b5cf6\"},{\"index\":6,\"coins\":4,\"label\":\"4 Koin\",\"weight\":60,\"color\":\"#fde047\"},{\"index\":7,\"coins\":64,\"label\":\"64 Koin\",\"weight\":0.1,\"color\":\"#10b981\"}]",
+        "updated_by": "admin",
+        "updated_at": "2026-10-11T13:18:58.122Z"
+      }
+    ],
+    "system_backups": [
+      {
+        "id": "bkp_1791721587972_axyvg",
+        "filename": "backup_mie_jebew_2026-10-11T12-26-27-971Z.json",
+        "backup_type": "auto_daily",
+        "size_bytes": 20457,
+        "tables_count": 21,
+        "records_count": 45,
+        "status": "success",
+        "checksum": "53d12f890140620b81c1628efc5f1457962007ce106c7d9912ad3e208c223b51",
+        "notes": "Pencadangan harian terjadwal otomatis",
+        "created_by": "system_cron",
+        "created_at": "2026-10-11T12:26:27.985Z"
+      },
+      {
+        "id": "bkp_1791721597114_kucjq",
+        "filename": "backup_mie_jebew_2026-10-11T12-26-37-114Z.json",
+        "backup_type": "manual",
+        "size_bytes": 20444,
+        "tables_count": 21,
+        "records_count": 45,
+        "status": "success",
+        "checksum": "87dfe8f79809e8ba40af511b4bc6f0697e5c74f3cbbafdff6c5a83ebd7f37d99",
+        "notes": "Pengujian backup otomatis & manual",
+        "created_by": "admin",
+        "created_at": "2026-10-11T12:26:37.118Z"
+      },
+      {
+        "id": "bkp_1791723052822_9huoi",
+        "filename": "backup_mie_jebew_2026-10-11T12-50-52-822Z.json",
+        "backup_type": "pre_restore_safety",
+        "size_bytes": 30842,
+        "tables_count": 28,
+        "records_count": 69,
+        "status": "success",
+        "checksum": "3b2d6312a08b507e9da30681467e7b641bd188bcccf66d4b55dcc9c26bb0a7d0",
+        "notes": "Pre-deployment snapshot versi v1.2.1-verified",
+        "created_by": "admin",
+        "created_at": "2026-10-11T12:50:52.839Z"
+      },
+      {
+        "id": "bkp_1791723203682_xorxk",
+        "filename": "backup_mie_jebew_2026-10-11T12-53-23-681Z.json",
+        "backup_type": "manual",
+        "size_bytes": 31668,
+        "tables_count": 28,
+        "records_count": 71,
+        "status": "success",
+        "checksum": "556271a07e2c4d368229dcad7668ae41c4280cb56652ba383b3c7f2faf0750c6",
+        "notes": "Pre-SpinWheel AntiCheat Hardening Backup",
+        "created_by": "admin",
+        "created_at": "2026-10-11T12:53:23.686Z"
+      },
+      {
+        "id": "bkp_1791936804536_17pii",
+        "filename": "backup_mie_jebew_2026-10-14T00-13-24-536Z.json",
+        "backup_type": "auto_daily",
+        "size_bytes": 39415,
+        "tables_count": 28,
+        "records_count": 94,
+        "status": "success",
+        "checksum": "975ee8e1e068b3728235c7504383dfe436fec65434578265e4651d48615e3859",
+        "notes": "Pencadangan harian terjadwal otomatis",
+        "created_by": "system_cron",
+        "created_at": "2026-10-14T00:13:24.556Z"
+      }
+    ],
+    "fraud_alerts": [],
+    "inventory_items": [
+      {
+        "id": "inv-mie-orig",
+        "item_type": "product",
+        "reference_id": "mie-1",
+        "name": "Mie Jebew Original (Bahan Porsi)",
+        "sku": "SKU-MIE-ORIG",
+        "current_stock": 130,
+        "min_stock_alert": 25,
+        "unit": "porsi",
+        "daily_avg_sales": 18.5,
+        "last_restocked_at": "2026-10-11T12:50:52.676Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:50:52.676Z"
+      },
+      {
+        "id": "inv-mie-kuah",
+        "item_type": "product",
+        "reference_id": "mie-2",
+        "name": "Mie Jebew Kuah Pedas (Bahan Porsi)",
+        "sku": "SKU-MIE-KUAH",
+        "current_stock": 85,
+        "min_stock_alert": 20,
+        "unit": "porsi",
+        "daily_avg_sales": 12,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-mie-manis",
+        "item_type": "product",
+        "reference_id": "mie-3",
+        "name": "Mie Jebew Manis Gurih (Bahan Porsi)",
+        "sku": "SKU-MIE-MANIS",
+        "current_stock": 75,
+        "min_stock_alert": 15,
+        "unit": "porsi",
+        "daily_avg_sales": 10.5,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-mie-keju",
+        "item_type": "product",
+        "reference_id": "mie-4",
+        "name": "Mie Jebew Spesial Keju (Bahan Porsi)",
+        "sku": "SKU-MIE-KEJU",
+        "current_stock": 50,
+        "min_stock_alert": 15,
+        "unit": "porsi",
+        "daily_avg_sales": 8,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-bot-orig",
+        "item_type": "bottle",
+        "reference_id": "bot-1",
+        "name": "Sambal Botol Jebew Original 200ml",
+        "sku": "SKU-BOT-ORIG",
+        "current_stock": 45,
+        "min_stock_alert": 10,
+        "unit": "botol",
+        "daily_avg_sales": 4.2,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-bot-xtra",
+        "item_type": "bottle",
+        "reference_id": "bot-2",
+        "name": "Sambal Botol Jebew Ekstra Pedas 200ml",
+        "sku": "SKU-BOT-XTRA",
+        "current_stock": 32,
+        "min_stock_alert": 10,
+        "unit": "botol",
+        "daily_avg_sales": 3.5,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-rwd-mie",
+        "item_type": "physical_reward",
+        "reference_id": "free_mie_original",
+        "name": "Hadiah Fisik: Free 1 Porsi Mie Jebew Original (Reward 2.500 Koin)",
+        "sku": "SKU-RWD-MIE-FREE",
+        "current_stock": 40,
+        "min_stock_alert": 10,
+        "unit": "porsi",
+        "daily_avg_sales": 2,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-top-pangsit",
+        "item_type": "product",
+        "reference_id": "top-1",
+        "name": "Pangsit Goreng Renyah (Stok pcs)",
+        "sku": "SKU-TOP-PANGSIT",
+        "current_stock": 200,
+        "min_stock_alert": 40,
+        "unit": "pcs",
+        "daily_avg_sales": 35,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "inv-top-bakso",
+        "item_type": "product",
+        "reference_id": "top-2",
+        "name": "Bakso Sapi Kenyal (Stok pcs)",
+        "sku": "SKU-TOP-BAKSO",
+        "current_stock": 160,
+        "min_stock_alert": 30,
+        "unit": "pcs",
+        "daily_avg_sales": 28,
+        "last_restocked_at": "2026-10-11T12:37:01.187Z",
+        "created_at": "2026-10-11T12:37:01.187Z",
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      }
+    ],
+    "inventory_logs": [
+      {
+        "id": 1,
+        "inventory_id": "inv-mie-orig",
+        "change_type": "restock",
+        "quantity_change": 10,
+        "stock_before": 120,
+        "stock_after": 130,
+        "notes": "Test restock porsi mie",
+        "admin_username": "admin",
+        "reference_id": null,
+        "created_at": "2026-10-11T12:50:52.676Z"
+      }
+    ],
+    "reconciliation_anomalies": [],
+    "deployment_records": [
+      {
+        "id": "dep-init-2026",
+        "version": "v1.2.0-rc1",
+        "git_commit": "f8e31a9",
+        "deploy_status": "active",
+        "notes": "Rilis awal sistem kontrol operasional Mie Jebew, spin wheel harian, dan pemantauan sistem.",
+        "database_backup_id": null,
+        "deployed_by": "Adam / Super Admin",
+        "deployed_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "id": "dep-mv3tn7kl",
+        "version": "v1.2.1-verified",
+        "git_commit": "HEAD",
+        "deploy_status": "active",
+        "notes": "Automated test release snapshot",
+        "database_backup_id": "bkp_1791723052822_9huoi",
+        "deployed_by": "admin",
+        "deployed_at": "2026-10-11T12:50:52.821Z"
+      }
+    ],
+    "scheduled_tasks": [
+      {
+        "task_key": "daily_spin_reset",
+        "name": "Reset Kuota Spin Harian (00:00 WIB)",
+        "schedule_cron": "0 17 * * *",
+        "description": "Mereset kuota spin roda keberuntungan untuk seluruh pelanggan setiap pergantian hari WIB.",
+        "last_run_at": "2026-10-11T12:50:52.888Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 0,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:50:52.888Z"
+      },
+      {
+        "task_key": "auto_daily_backup",
+        "name": "Pencadangan Database Otomatis Harian",
+        "schedule_cron": "0 19 * * *",
+        "description": "Membuat snapshot cadangan database dan struktur file setiap hari pukul 02:00 WIB.",
+        "last_run_at": "2026-10-11T12:37:01.187Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 450,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "task_key": "reconciliation_audit",
+        "name": "Audit Rekonsiliasi Transaksi & Saldo",
+        "schedule_cron": "0 */3 * * *",
+        "description": "Memeriksa kesesuaian pembayaran, pesanan, saldo koin, dan pemakaian voucher.",
+        "last_run_at": "2026-10-11T12:37:01.187Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 310,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "task_key": "inventory_alert_check",
+        "name": "Audit Stok Rendah & Notifikasi Admin",
+        "schedule_cron": "0 */6 * * *",
+        "description": "Memeriksa batas minimum stok produk, sambal kemasan, dan hadiah fisik.",
+        "last_run_at": "2026-10-11T12:37:01.187Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 95,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "task_key": "voucher_expiry_check",
+        "name": "Pemeriksaan Kedaluwarsa Voucher",
+        "schedule_cron": "0 * * * *",
+        "description": "Memvalidasi masa berlaku voucher aktif dan memperbarui status kupon kedaluwarsa.",
+        "last_run_at": "2026-10-11T12:37:01.187Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 140,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      },
+      {
+        "task_key": "temp_cleanup",
+        "name": "Pembersihan File Sementara & Log Usang",
+        "schedule_cron": "0 20 * * *",
+        "description": "Menghapus session token kedaluwarsa dan membersihkan cache sistem.",
+        "last_run_at": "2026-10-11T12:37:01.187Z",
+        "next_run_at": "2026-10-11T12:37:01.187Z",
+        "last_status": "success",
+        "last_duration_ms": 220,
+        "last_error": null,
+        "is_enabled": 1,
+        "updated_at": "2026-10-11T12:37:01.187Z"
+      }
+    ]
+  }
+}

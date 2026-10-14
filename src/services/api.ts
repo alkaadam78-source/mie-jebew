@@ -1,3 +1,19 @@
+
+// Real-time synchronization across browser tabs
+export const publicDataChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('mie_jebew_data_sync') : null;
+
+export function notifyDataChanged() {
+  if (publicDataChannel) {
+    try {
+      publicDataChannel.postMessage({ type: 'REFRESH', timestamp: Date.now() });
+    } catch {
+      // ignore
+    }
+  }
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('public-data:refresh'));
+  }
+}
 import {
   BootstrapData,
   MenuItem,
@@ -15,6 +31,8 @@ import {
   MediaItem,
   AdminUser,
   ActivityLogItem,
+  PromotionalPopupData,
+  PromotionalPopupHistoryItem,
 } from '../types';
 
 const API_BASE = '/api';
@@ -129,28 +147,38 @@ export async function apiDeleteAdminUser(id: number) {
 
 // ======================== MENU & CATEGORIES ========================
 export async function apiGetMenuItems(params?: { search?: string; category?: string; status?: string }): Promise<{ items: MenuItem[] }> {
-  const query = new URLSearchParams(params as any).toString();
-  return request<{ items: MenuItem[] }>(`/menu/items?${query}`);
+  const qp = new URLSearchParams();
+  if (params?.search && params.search.trim()) qp.set('search', params.search.trim());
+  if (params?.category && params.category !== 'all' && params.category !== 'undefined') qp.set('category', params.category);
+  if (params?.status && params.status !== 'all' && params.status !== 'undefined') qp.set('status', params.status);
+  const qs = qp.toString();
+  return request<{ items: MenuItem[] }>(qs ? `/menu/items?${qs}` : '/menu/items');
 }
 
 export async function apiCreateMenuItem(item: Partial<MenuItem>) {
-  return request('/menu/items', {
+  const res = await request('/menu/items', {
     method: 'POST',
     body: JSON.stringify(item),
   });
+  notifyDataChanged();
+  return res;
 }
 
 export async function apiUpdateMenuItem(id: string, item: Partial<MenuItem>) {
-  return request(`/menu/items/${id}`, {
+  const res = await request(`/menu/items/${id}`, {
     method: 'PUT',
     body: JSON.stringify(item),
   });
+  notifyDataChanged();
+  return res;
 }
 
 export async function apiDeleteMenuItem(id: string) {
-  return request(`/menu/items/${id}`, {
+  const res = await request(`/menu/items/${id}`, {
     method: 'DELETE',
   });
+  notifyDataChanged();
+  return res;
 }
 
 export async function apiGetCategories(): Promise<{ categories: Category[] }> {
@@ -191,10 +219,12 @@ export async function apiCreateBottle(bottle: Partial<ProductBottle>) {
 }
 
 export async function apiUpdateBottle(id: string, bottle: Partial<ProductBottle>) {
-  return request(`/bottles/${id}`, {
+  const res = await request(`/bottles/${id}`, {
     method: 'PUT',
     body: JSON.stringify(bottle),
   });
+  notifyDataChanged();
+  return res;
 }
 
 export async function apiDeleteBottle(id: string) {
@@ -421,3 +451,101 @@ export async function apiGetDashboardStats(): Promise<{
 }> {
   return request('/logs/stats');
 }
+
+// ======================== PROMOTIONAL POPUP API ========================
+export async function apiGetPublicPromoPopup(): Promise<{ active: boolean; popup: PromotionalPopupData | null; reason?: string }> {
+  return request('/public/promo-popup');
+}
+
+export async function apiGetAdminPromoPopup(id?: string): Promise<{
+  popup: PromotionalPopupData;
+  popups?: PromotionalPopupData[];
+  history: PromotionalPopupHistoryItem[];
+}> {
+  const url = id ? `/admin/promo-popup?id=${encodeURIComponent(id)}` : '/admin/promo-popup';
+  return request(url);
+}
+
+export async function apiCreatePromoPopup(data: Partial<PromotionalPopupData>): Promise<{
+  success: boolean;
+  message: string;
+  popup: PromotionalPopupData;
+}> {
+  const res = await request<{
+    success: boolean;
+    message: string;
+    popup: PromotionalPopupData;
+  }>('/admin/promo-popup/create', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+  notifyDataChanged();
+  return res;
+}
+
+export async function apiUpdatePromoPopup(data: Partial<PromotionalPopupData> & { change_summary?: string }): Promise<{
+  success: boolean;
+  message: string;
+  popup: PromotionalPopupData;
+}> {
+  const res = await request<{
+    success: boolean;
+    message: string;
+    popup: PromotionalPopupData;
+  }>('/admin/promo-popup', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+  notifyDataChanged();
+  return res;
+}
+
+export async function apiSetActivePromoPopup(id: string): Promise<{
+  success: boolean;
+  message: string;
+  popup: PromotionalPopupData;
+}> {
+  const res = await request<{
+    success: boolean;
+    message: string;
+    popup: PromotionalPopupData;
+  }>(`/admin/promo-popup/activate/${encodeURIComponent(id)}`, {
+    method: 'POST',
+  });
+  notifyDataChanged();
+  return res;
+}
+
+export async function apiDeletePromoPopup(id: string): Promise<{
+  success: boolean;
+  message: string;
+}> {
+  const res = await request<{
+    success: boolean;
+    message: string;
+  }>(`/admin/promo-popup/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  notifyDataChanged();
+  return res;
+}
+
+export async function apiRollbackPromoPopup(historyId: string): Promise<{
+  success: boolean;
+  message: string;
+  popup: PromotionalPopupData;
+}> {
+  return request(`/admin/promo-popup/rollback/${historyId}`, {
+    method: 'POST',
+  });
+}
+
+export async function apiUploadPromoPopupImage(file: File): Promise<{ success: boolean; imageUrl: string }> {
+  const formData = new FormData();
+  formData.append('image', file);
+  return request('/admin/promo-popup/upload-image', {
+    method: 'POST',
+    body: formData,
+  });
+}
+

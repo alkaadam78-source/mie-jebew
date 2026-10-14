@@ -8,6 +8,7 @@ import { AdminMenu } from './AdminMenu';
 import { AdminBottles } from './AdminBottles';
 import { AdminPrices } from './AdminPrices';
 import { AdminPromotions } from './AdminPromotions';
+import { AdminPromotionalPopup } from './AdminPromotionalPopup';
 import { AdminBundles } from './AdminBundles';
 import { AdminCustomOrder } from './AdminCustomOrder';
 import { AdminContent } from './AdminContent';
@@ -132,6 +133,8 @@ export const AdminDashboard: React.FC = () => {
         return <AdminPrices />;
       case 'promotions':
         return <AdminPromotions />;
+      case 'promo_popup':
+        return <AdminPromotionalPopup />;
       case 'bundles':
         return <AdminBundles />;
       case 'custom_order':

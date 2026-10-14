@@ -3,18 +3,17 @@ import { useCart } from './hooks/useCart';
 import { useFoodRatings } from './hooks/useFoodRatings';
 import { useRouter } from './hooks/useRouter';
 import { useSpinReward } from './hooks/useSpinReward';
-import { MenuItem, SpiceLevel, Topping, ProductBottle, BundleItem } from './types';
+import { MenuItem, SpiceLevel, Topping, BundleItem } from './types';
+import { MENU_ITEMS } from './data/menu';
 import { PublicDataProvider, usePublicData } from './context/PublicDataContext';
-import { CustomerAuthProvider } from './context/CustomerAuthContext';
+import { CustomerAuthProvider, useCustomerAuth } from './context/CustomerAuthContext';
 import { CustomerAuthModal } from './components/auth/CustomerAuthModal';
 
 // Public Page Components
 import { Navbar } from './components/layout/Navbar';
 import { HeroBanner } from './components/home/HeroBanner';
-import { BottlesSection } from './components/home/BottlesSection';
 import { MenuCatalog } from './components/home/MenuCatalog';
 import { WhyChooseUsSection } from './components/home/WhyChooseUsSection';
-import { BehindKitchenSection } from './components/home/BehindKitchenSection';
 import { InstagramSection } from './components/home/InstagramSection';
 import { PromoSection } from './components/home/PromoSection';
 import { VinasSection } from './components/home/VinasSection';
@@ -28,6 +27,9 @@ import { BottomCartBar } from './components/order/BottomCartBar';
 import { RefreshCwIcon } from './components/ui/Icons';
 import { MaintenanceScreen } from './components/maintenance/MaintenanceScreen';
 import { MaintenanceBanner } from './components/maintenance/MaintenanceBanner';
+import { PromotionalPopup } from './components/promo/PromotionalPopup';
+import { apiGetPublicPromoPopup } from './services/api';
+import { PromotionalPopupData } from './types';
 
 // Lazy-loaded on-demand modals to keep initial bundle tiny and fast
 const CustomOrderModal = lazy(() => import('./components/order/CustomOrderModal'));
@@ -53,7 +55,28 @@ interface PublicSiteProps {
   maintenanceStatus?: MaintenanceStatus | null;
 }
 
+
+const DEFAULT_PROMO_POPUP: PromotionalPopupData = {
+  id: "main_popup",
+  title: "MIE JEBEW",
+  headline: "PEDASNYA BIKIN NAGIH!",
+  subtitle: "Laper? Gas Mie Jebew Original! 🍜",
+  description: "Mie kenyal pedas khas Jebew dengan bumbu rahasia gurih pedas nampol. Klik banner untuk pesan langsung!",
+  cta_text: "PESAN MIE JEBEW ORIGINAL 🚀",
+  cta_link: "#menu-item-mie-1",
+  secondary_text: "Tutup",
+  image_url: "/rasa-mie/Original.jpeg",
+  badge_text: "PROMO SPESIAL 🔥",
+  is_active: true,
+  target_page: "all",
+  delay_seconds: 0.3,
+  frequency: "always",
+  status: "published",
+  updated_at: new Date().toISOString(),
+};
+
 function PublicSite({ maintenanceStatus }: PublicSiteProps) {
+  const { customer, isAuthModalOpen } = useCustomerAuth();
   const isMaintenanceReadOnly = Boolean(
     maintenanceStatus?.isEnabled && maintenanceStatus?.mode === 'read_only'
   );
@@ -75,10 +98,8 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
   } = useFoodRatings();
 
   const {
-    bottles,
     bundles,
     whyChooseUs,
-    behindKitchen,
     vinas,
   } = usePublicData();
 
@@ -103,6 +124,43 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
 
   const [isSpinModalOpen, setIsSpinModalOpen] = useState(false);
   const [spinInitialTab, setSpinInitialTab] = useState<'spin' | 'redeem'>('spin');
+
+  // Promotional Popup State (Neo-Brutalism Campaign)
+  const [promoPopup, setPromoPopup] = useState<PromotionalPopupData | null>(DEFAULT_PROMO_POPUP);
+
+  // Realtime Data Sync via BroadcastChannel (Auto update popup banner & menu)
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.BroadcastChannel) return;
+    const channel = new BroadcastChannel('mie_jebew_data_sync');
+    channel.onmessage = () => {
+      if (isMaintenanceReadOnly) return;
+      apiGetPublicPromoPopup()
+        .then((res) => {
+          if (res?.active && res.popup) {
+            setPromoPopup(res.popup);
+          } else {
+            setPromoPopup(null);
+          }
+        })
+        .catch(() => {});
+    };
+    return () => {
+      channel.close();
+    };
+  }, [isMaintenanceReadOnly]);
+
+  useEffect(() => {
+    if (isMaintenanceReadOnly) return;
+    apiGetPublicPromoPopup()
+      .then((res) => {
+        if (res?.active && res.popup) {
+          setPromoPopup(res.popup);
+        } else {
+          setPromoPopup(null);
+        }
+      })
+      .catch(() => {});
+  }, [isMaintenanceReadOnly]);
 
   // Trigger otomatis 1 kali saat user masuk ke web jika belum spin hari ini
   useEffect(() => {
@@ -135,6 +193,21 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
     }
   }, []);
 
+  const handleSelectOriginal = useCallback(() => {
+    const target = document.getElementById("menu-item-mie-1") || document.getElementById("menu");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("ring-4", "ring-jebew-red", "transition-all");
+      setTimeout(() => {
+        target.classList.remove("ring-4", "ring-jebew-red");
+      }, 2500);
+    }
+    const originalItem = MENU_ITEMS.find((m: MenuItem) => m.id === "mie-1");
+    if (originalItem) {
+      setSelectedMenuItem(originalItem);
+    }
+  }, []);
+
   const handleOpenCustomizer = useCallback((item: MenuItem) => {
     setSelectedMenuItem(item);
   }, []);
@@ -153,21 +226,7 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
     addToCart(item, quantity, spiceLevel, toppings, notes);
   }, [addToCart]);
 
-  const handleOrderBottle = useCallback((bottle: ProductBottle) => {
-    const bottleItem: MenuItem = {
-      id: `bottle-${bottle.id}`,
-      name: bottle.name,
-      description: bottle.description,
-      price: bottle.sale_price || bottle.price,
-      originalPrice: bottle.sale_price ? bottle.price : undefined,
-      image: bottle.image || '/rasa-mie/Original.jpeg',
-      category: 'topping',
-      badge: bottle.badge,
-      isSpicySelectable: false,
-    };
-    addToCart(bottleItem, 1, 0, [], 'Pesanan Sambal Botol');
-    setIsCartOpen(true);
-  }, [addToCart]);
+  
 
   const handleOrderBundle = useCallback((bundle: BundleItem) => {
     const bundleItem: MenuItem = {
@@ -212,6 +271,75 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
     setIsCartOpen(true);
   }, []);
 
+  // Handler untuk aksi & pengalihan Promotional Popup Banner
+  const handlePromoAction = useCallback((ctaLink: string) => {
+    if (!ctaLink) {
+      handleSelectOriginal();
+      return;
+    }
+
+    const cleanLink = ctaLink.trim();
+
+    // 1. Order Original
+    if (cleanLink === '#order-original' || cleanLink === 'original' || cleanLink === '#original') {
+      handleSelectOriginal();
+      return;
+    }
+
+    // 2. Specific Menu Item (item:mie-2 or menu-item:mie-2)
+    if (cleanLink.startsWith('item:') || cleanLink.startsWith('menu-item:')) {
+      const targetId = cleanLink.replace(/^(item:|menu-item:)/, '');
+      const foundItem = MENU_ITEMS.find((m: MenuItem) => m.id === targetId);
+      if (foundItem) {
+        handleOpenCustomizer(foundItem);
+      } else {
+        handleSelectOriginal();
+      }
+      return;
+    }
+
+    // 3. Spin Wheel
+    if (cleanLink === '#spin' || cleanLink === '#rewards' || cleanLink === 'spin' || cleanLink === 'rewards') {
+      handleOpenSpinWheel('spin');
+      return;
+    }
+
+    // 4. Cart Drawer
+    if (cleanLink === '#cart' || cleanLink === 'cart') {
+      handleOpenCart();
+      return;
+    }
+
+    // 5. WhatsApp
+    if (cleanLink.startsWith('whatsapp') || cleanLink.startsWith('https://wa.me')) {
+      const url = cleanLink.startsWith('http')
+        ? cleanLink
+        : 'https://wa.me/6285122014584?text=' + encodeURIComponent('Halo Mie Jebew, saya ingin pesan promo: ' + (promoPopup?.headline || 'Promo Spesial') + '!');
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // 6. External URL
+    if (cleanLink.startsWith('http://') || cleanLink.startsWith('https://')) {
+      window.open(cleanLink, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // 7. Section Hash Anchor (#menu, #custom-order, #reviews, #hero, etc.)
+    if (cleanLink.startsWith('#')) {
+      const el = document.querySelector(cleanLink);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    // Fallback
+    handleSelectOriginal();
+  }, [handleSelectOriginal, handleOpenCustomizer, handleOpenSpinWheel, handleOpenCart, promoPopup]);
+
   const handleCloseCheckout = useCallback(() => {
     setIsCheckoutOpen(false);
   }, []);
@@ -221,10 +349,8 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
   }, []);
 
   // Filter active public items
-  const activeBottles = (bottles || []).filter((b) => Boolean(b.is_active));
   const activeBundles = (bundles || []).filter((b) => Boolean(b.is_active));
   const activeWhyUs = (whyChooseUs || []).filter((w) => Boolean(w.is_active));
-  const activeKitchen = (behindKitchen || []).filter((k) => Boolean(k.is_active));
 
   return (
     <div className="min-h-screen flex flex-col bg-cream text-black font-sans selection:bg-jebew-yellow selection:text-black">
@@ -251,13 +377,7 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
           onExploreMenu={handleScrollToMenu}
         />
 
-        {/* 2. Bottles / Chili Oil & Sambal Kemasan */}
-        {activeBottles.length > 0 && (
-          <BottlesSection
-            bottles={activeBottles}
-            onOrderBottle={handleOrderBottle}
-          />
-        )}
+        
 
         {/* 3. Our Menu Catalog & Interactive Ratings */}
         <MenuCatalog
@@ -271,13 +391,10 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
           <WhyChooseUsSection items={activeWhyUs} />
         )}
 
-        {/* 5. Behind the Kitchen / Proses Dapur */}
-        {activeKitchen.length > 0 && (
-          <BehindKitchenSection items={activeKitchen} />
-        )}
-
-        {/* 6. Our Social Media Showcase */}
+        {/* 5. Tim Crave Corner & Teaser (Diposisikan di atas agar terlihat utuh) */}
         <InstagramSection />
+
+        
 
         {/* 7. Promo Bundles & Penawaran Spesial */}
         <PromoSection onSelectPromo={handleOpenCustomizer} />
@@ -398,6 +515,17 @@ function PublicSite({ maintenanceStatus }: PublicSiteProps) {
 
         {/* Customer Auth Modal (Login / Register via WhatsApp) */}
         <CustomerAuthModal />
+
+        {/* Neo-Brutalism Promotional Popup: Hanya muncul SETELAH user berhasil login */}
+        {customer && !isAuthModalOpen && (
+          <PromotionalPopup
+            popup={promoPopup}
+            onOrderNow={handleSelectOriginal}
+            onSelectOriginal={handleSelectOriginal}
+            onActionClick={handlePromoAction}
+            currentPage="home"
+          />
+        )}
       </Suspense>
     </div>
   );

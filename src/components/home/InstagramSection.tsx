@@ -82,7 +82,7 @@ const InstagramCard: React.FC<InstagramCardProps> = ({ post, badgeType }) => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Visual Slider Container */}
-      <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-neutral-950 select-none">
+      <div className="relative aspect-[4/3] sm:aspect-[4/3] max-h-[340px] sm:max-h-[380px] overflow-hidden bg-neutral-950 select-none">
         {/* Slides Track */}
         <div
           className="flex w-full h-full transition-transform duration-500 ease-out"
@@ -219,7 +219,7 @@ const InstagramCard: React.FC<InstagramCardProps> = ({ post, badgeType }) => {
 
 export const InstagramSection: React.FC = () => {
   return (
-    <section className="py-10 sm:py-16 bg-cream border-t-3 border-black overflow-hidden">
+    <section id="tim-cravecorner" className="scroll-mt-20 py-8 sm:py-12 bg-cream border-t-3 border-black overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}

@@ -5,7 +5,6 @@ import {
   ShoppingBagIcon,
   GiftIcon,
   UtensilsIcon,
-  WineIcon,
   TagIcon,
   DollarSignIcon,
   PackageIcon,
@@ -44,6 +43,7 @@ export type AdminTab =
   | 'bottles'
   | 'prices'
   | 'promotions'
+  | 'promo_popup'
   | 'bundles'
   | 'custom_order'
   | 'content'
@@ -121,9 +121,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
       badge: maintenanceState.isEnabled ? 'MAINT' : undefined,
     },
     { id: 'menu', label: 'Our Menu', icon: UtensilsIcon },
-    { id: 'bottles', label: 'Bottles & Sambal', icon: WineIcon },
     { id: 'prices', label: 'Price Management', icon: DollarSignIcon },
     { id: 'promotions', label: 'Promotions & Promo', icon: TagIcon },
+    { id: 'promo_popup', label: 'Popup Promosi (Neo)', icon: FlameIcon, badge: 'POPUP' },
     { id: 'bundles', label: 'Bundles & Paket', icon: PackageIcon },
     { id: 'custom_order', label: 'Custom Orders', icon: SlidersIcon },
     { id: 'content', label: 'Website Content', icon: GlobeIcon },

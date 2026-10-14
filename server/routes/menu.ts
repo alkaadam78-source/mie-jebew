@@ -71,11 +71,11 @@ menuRouter.get('/items', verifyAuth, (req, res: Response) => {
   let query = 'SELECT m.*, c.name as category_name FROM menu_items m LEFT JOIN categories c ON m.category_id = c.id WHERE 1=1';
   const params: any[] = [];
 
-  if (search) {
+  if (search && search !== 'undefined') {
     query += ' AND (m.name LIKE ? OR m.description LIKE ?)';
     params.push(`%${search}%`, `%${search}%`);
   }
-  if (category && category !== 'all') {
+  if (category && category !== 'all' && category !== 'undefined') {
     query += ' AND m.category_id = ?';
     params.push(category);
   }

@@ -48,7 +48,7 @@ publicRouter.get('/bootstrap', (_req: Request, res: Response) => {
 
   const homepage = db.prepare('SELECT * FROM homepage_content WHERE id = ?').get('hero_content');
   const categories = db.prepare('SELECT * FROM categories WHERE is_active = 1 ORDER BY sort_order ASC').all();
-  const menuItems = db.prepare('SELECT * FROM menu_items WHERE is_active = 1 ORDER BY sort_order ASC').all();
+  const menuItems = db.prepare("SELECT m.*, COALESCE(m.category_id, 'mie') as category, c.name as category_name FROM menu_items m LEFT JOIN categories c ON m.category_id = c.id WHERE m.is_active = 1 ORDER BY m.sort_order ASC").all();
   const bottles = db.prepare('SELECT * FROM products_bottles WHERE is_active = 1 ORDER BY sort_order ASC').all();
   const customOptions = db.prepare('SELECT * FROM custom_order_options WHERE is_active = 1 ORDER BY sort_order ASC').all();
   const bundles = db.prepare('SELECT * FROM bundles WHERE is_active = 1 ORDER BY sort_order ASC').all().map((b: any) => ({

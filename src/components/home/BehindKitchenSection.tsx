@@ -12,8 +12,7 @@ export const BehindKitchenSection: React.FC<BehindKitchenSectionProps> = ({ item
 
   return (
     <section id="behind-kitchen" className="py-12 sm:py-16 bg-cream border-t-3 border-black relative">
-      <span id="tim-cravecorner" className="absolute -top-20 opacity-0 pointer-events-none" />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <ScrollReveal animation="fade-up" duration={700}>

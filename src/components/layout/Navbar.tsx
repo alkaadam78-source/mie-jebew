@@ -346,17 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <span className="text-gray-400 font-bold">›</span>
                   </button>
 
-                  {/* Bottles Chili Oil */}
-                  <button
-                    onClick={() => handleNavClick('#bottles')}
-                    className="w-full flex items-center justify-between bg-white hover:bg-cream-100 border-2 border-black p-3 rounded-xl font-black text-xs sm:text-sm shadow-brutal-xs cursor-pointer text-left transition-all"
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <span>🌶️</span>
-                      <span>Sambal & Chili Oil Botolan</span>
-                    </span>
-                    <span className="text-gray-400 font-bold">›</span>
-                  </button>
+                  
 
                   {/* TIM CRAVE CORNER (Special Highlight) */}
                   <button

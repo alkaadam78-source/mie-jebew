@@ -39,7 +39,7 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
     if (selectedCategory === 'all') {
       return sourceItems;
     }
-    return sourceItems.filter((item) => item.category === selectedCategory);
+    return sourceItems.filter((item) => (item.category || item.category_id) === selectedCategory);
   }, [selectedCategory, sourceItems]);
 
   return (

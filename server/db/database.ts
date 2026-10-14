@@ -416,6 +416,52 @@ export function initDatabase() {
       updated_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS promotional_popup (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      headline TEXT NOT NULL,
+      subtitle TEXT NOT NULL,
+      description TEXT NOT NULL,
+      cta_text TEXT NOT NULL,
+      cta_link TEXT NOT NULL,
+      secondary_text TEXT NOT NULL,
+      image_url TEXT NOT NULL,
+      badge_text TEXT,
+      is_active INTEGER NOT NULL DEFAULT 1,
+      target_page TEXT NOT NULL DEFAULT 'all', -- 'all' | 'home' | 'menu'
+      delay_seconds INTEGER NOT NULL DEFAULT 2,
+      frequency TEXT NOT NULL DEFAULT 'once_per_session', -- 'once_per_session' | 'once_per_day' | 'always'
+      start_date TEXT DEFAULT NULL,
+      end_date TEXT DEFAULT NULL,
+      status TEXT NOT NULL DEFAULT 'published', -- 'published' | 'draft'
+      updated_by TEXT DEFAULT 'admin',
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS promotional_popup_history (
+      id TEXT PRIMARY KEY,
+      popup_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      headline TEXT NOT NULL,
+      subtitle TEXT NOT NULL,
+      description TEXT NOT NULL,
+      cta_text TEXT NOT NULL,
+      cta_link TEXT NOT NULL,
+      secondary_text TEXT NOT NULL,
+      image_url TEXT NOT NULL,
+      badge_text TEXT,
+      is_active INTEGER NOT NULL,
+      target_page TEXT NOT NULL,
+      delay_seconds INTEGER NOT NULL,
+      frequency TEXT NOT NULL,
+      start_date TEXT,
+      end_date TEXT,
+      status TEXT NOT NULL,
+      saved_by TEXT NOT NULL,
+      saved_at TEXT NOT NULL,
+      change_summary TEXT
+    );
+
     CREATE INDEX IF NOT EXISTS idx_menu_category ON menu_items(category_id);
     CREATE INDEX IF NOT EXISTS idx_menu_active ON menu_items(is_active);
     CREATE INDEX IF NOT EXISTS idx_bottles_active ON products_bottles(is_active);
@@ -1122,4 +1168,35 @@ function seedOperationsData() {
       now
     );
   }
+
+  // 5. Seed Promotional Popup Configuration
+  const popupCount = db.prepare('SELECT COUNT(*) as count FROM promotional_popup').get() as { count: number };
+  if (popupCount.count === 0) {
+    db.prepare(`
+      INSERT INTO promotional_popup (
+        id, title, headline, subtitle, description, cta_text, cta_link, secondary_text,
+        image_url, badge_text, is_active, target_page, delay_seconds, frequency,
+        start_date, end_date, status, updated_by, updated_at
+      ) VALUES (
+        'main_popup', 'MIE JEBEW', 'PEDASNYA BIKIN NAGIH!', 'Laper? Gas, bro! 🍜',
+        'Mie pedas + topping favorit lo.', 'PESAN SEKARANG', '#menu', 'Nanti aja',
+        '/promo-popup-banner.jpg', 'PROMO SPESIAL 🔥', 1, 'all', 2, 'once_per_session',
+        NULL, NULL, 'published', 'admin', ?
+      )
+    `).run(now);
+
+    db.prepare(`
+      INSERT INTO promotional_popup_history (
+        id, popup_id, title, headline, subtitle, description, cta_text, cta_link, secondary_text,
+        image_url, badge_text, is_active, target_page, delay_seconds, frequency,
+        start_date, end_date, status, saved_by, saved_at, change_summary
+      ) VALUES (
+        'pop-hist-initial', 'main_popup', 'MIE JEBEW', 'PEDASNYA BIKIN NAGIH!', 'Laper? Gas, bro! 🍜',
+        'Mie pedas + topping favorit lo.', 'PESAN SEKARANG', '#menu', 'Nanti aja',
+        '/promo-popup-banner.jpg', 'PROMO SPESIAL 🔥', 1, 'all', 2, 'once_per_session',
+        NULL, NULL, 'published', 'admin', ?, 'Konfigurasi awal popup promosi Neo-Brutalism'
+      )
+    `).run(now);
+  }
 }
+

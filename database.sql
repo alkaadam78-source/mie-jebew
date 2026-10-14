@@ -670,3 +670,68 @@ CREATE TABLE IF NOT EXISTS `scheduled_tasks` (
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+-- 28. TABEL: promotional_popup (Konfigurasi Popup Promosi)
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `promotional_popup` (
+  `id` VARCHAR(50) PRIMARY KEY,
+  `title` VARCHAR(100) NOT NULL,
+  `headline` VARCHAR(150) NOT NULL,
+  `subtitle` VARCHAR(150) NOT NULL,
+  `description` TEXT NOT NULL,
+  `cta_text` VARCHAR(50) NOT NULL,
+  `cta_link` VARCHAR(255) NOT NULL,
+  `secondary_text` VARCHAR(50) NOT NULL,
+  `image_url` VARCHAR(255) NOT NULL,
+  `badge_text` VARCHAR(50) DEFAULT NULL,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `target_page` ENUM('all', 'home', 'menu') NOT NULL DEFAULT 'all',
+  `delay_seconds` INT NOT NULL DEFAULT 2,
+  `frequency` ENUM('once_per_session', 'once_per_day', 'always') NOT NULL DEFAULT 'once_per_session',
+  `start_date` DATETIME DEFAULT NULL,
+  `end_date` DATETIME DEFAULT NULL,
+  `status` ENUM('published', 'draft') NOT NULL DEFAULT 'published',
+  `updated_by` VARCHAR(50) DEFAULT 'admin',
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+-- 29. TABEL: promotional_popup_history (Riwayat & Rollback Popup)
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `promotional_popup_history` (
+  `id` VARCHAR(64) PRIMARY KEY,
+  `popup_id` VARCHAR(50) NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
+  `headline` VARCHAR(150) NOT NULL,
+  `subtitle` VARCHAR(150) NOT NULL,
+  `description` TEXT NOT NULL,
+  `cta_text` VARCHAR(50) NOT NULL,
+  `cta_link` VARCHAR(255) NOT NULL,
+  `secondary_text` VARCHAR(50) NOT NULL,
+  `image_url` VARCHAR(255) NOT NULL,
+  `badge_text` VARCHAR(50) DEFAULT NULL,
+  `is_active` TINYINT(1) NOT NULL,
+  `target_page` VARCHAR(20) NOT NULL,
+  `delay_seconds` INT NOT NULL,
+  `frequency` VARCHAR(30) NOT NULL,
+  `start_date` DATETIME DEFAULT NULL,
+  `end_date` DATETIME DEFAULT NULL,
+  `status` VARCHAR(20) NOT NULL,
+  `saved_by` VARCHAR(50) NOT NULL,
+  `saved_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `change_summary` TEXT DEFAULT NULL,
+  INDEX `idx_pop_hist_popup` (`popup_id`),
+  INDEX `idx_pop_hist_saved` (`saved_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- SEED POPUP AWAL
+INSERT IGNORE INTO `promotional_popup` (
+  `id`, `title`, `headline`, `subtitle`, `description`, `cta_text`, `cta_link`, `secondary_text`,
+  `image_url`, `badge_text`, `is_active`, `target_page`, `delay_seconds`, `frequency`, `status`, `updated_by`, `updated_at`
+) VALUES (
+  'main_popup', 'MIE JEBEW', 'PEDASNYA BIKIN NAGIH!', 'Laper? Gas, bro! 🍜',
+  'Mie pedas + topping favorit lo.', 'PESAN SEKARANG', '#menu', 'Nanti aja',
+  '/promo-popup-banner.jpg', 'PROMO SPESIAL 🔥', 1, 'all', 2, 'once_per_session', 'published', 'admin', NOW()
+);
+
+

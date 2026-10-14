@@ -330,3 +330,50 @@ export interface SpinSegment {
   textColor: string;
   isJackpot?: boolean;
 }
+
+export interface PromotionalPopupData {
+  id: string;
+  title: string;
+  headline: string;
+  subtitle: string;
+  description: string;
+  cta_text: string;
+  cta_link: string;
+  secondary_text: string;
+  image_url: string;
+  badge_text?: string;
+  is_active: boolean | number;
+  target_page: 'all' | 'home' | 'menu';
+  delay_seconds: number;
+  frequency: 'once_per_session' | 'once_per_day' | 'always';
+  start_date?: string | null;
+  end_date?: string | null;
+  status: 'published' | 'draft';
+  updated_by?: string;
+  updated_at: string;
+}
+
+export interface PromotionalPopupHistoryItem {
+  id: string;
+  popup_id: string;
+  title: string;
+  headline: string;
+  subtitle: string;
+  description: string;
+  cta_text: string;
+  cta_link: string;
+  secondary_text: string;
+  image_url: string;
+  badge_text?: string;
+  is_active: boolean | number;
+  target_page: 'all' | 'home' | 'menu';
+  delay_seconds: number;
+  frequency: 'once_per_session' | 'once_per_day' | 'always';
+  start_date?: string | null;
+  end_date?: string | null;
+  status: 'published' | 'draft';
+  saved_by: string;
+  saved_at: string;
+  change_summary?: string;
+}
+
