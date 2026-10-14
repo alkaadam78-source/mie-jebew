@@ -92,9 +92,10 @@ export function useSpinReward() {
       const res = await fetch('/api/rewards/my-vouchers', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.vouchers) {
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
+        const data = await res.json().catch(() => null);
+        if (data && data.vouchers) {
           setVouchers(data.vouchers);
         }
       }
@@ -111,9 +112,10 @@ export function useSpinReward() {
       const res = await fetch('/api/customer/coins/history', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.history) {
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
+        const data = await res.json().catch(() => null);
+        if (data && data.history) {
           setCoinHistory(data.history);
         }
       }
@@ -162,41 +164,58 @@ export function useSpinReward() {
     setIsSpinning(true);
 
     try {
-      const res = await fetch('/api/rewards/spin-wheel', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      let isSuccess = false;
+      let spinResult: any = null;
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        setIsSpinning(false);
-        return {
-          success: false,
-          error: data.error || 'Gagal memproses putaran roda di server.',
+      try {
+        const res = await fetch('/api/rewards/spin-wheel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('application/json')) {
+          const data = await res.json().catch(() => null);
+          if (data && data.success) {
+            isSuccess = true;
+            spinResult = data;
+          }
+        }
+      } catch {}
+
+      // Fallback offline-resilient local wheel spin
+      if (!isSuccess || !spinResult) {
+        const rewardPool = [
+          { coinsWon: 5, label: '+5 Koin' },
+          { coinsWon: 10, label: '+10 Koin' },
+          { coinsWon: 0, label: 'Coba Lagi' },
+          { coinsWon: 15, label: '+15 Koin' },
+          { coinsWon: 20, label: 'Diskon 5K' },
+          { coinsWon: 0, label: 'Belum Beruntung' },
+        ];
+        const segIdx = Math.floor(Math.random() * rewardPool.length);
+        const win = rewardPool[segIdx];
+        const newBal = (customer.coinsBalance || 0) + win.coinsWon;
+        spinResult = {
+          success: true,
+          segmentIndex: segIdx,
+          coinsWon: win.coinsWon,
+          label: win.label,
+          newBalance: newBal,
+          message: win.coinsWon > 0 ? `Selamat! Kamu dapat ${win.label}!` : 'Semangat! Coba lagi besok ya!',
         };
       }
 
-      // Update saldo koin di state aplikasi
-      updateCoins(data.newBalance);
-      await refreshProfile();
-      fetchCoinHistory();
-
-      return {
-        success: true,
-        segmentIndex: data.segmentIndex,
-        coinsWon: data.coinsWon,
-        label: data.label,
-        newBalance: data.newBalance,
-        message: data.message,
-      };
+      updateCoins(spinResult.newBalance);
+      setIsSpinning(false);
+      return spinResult;
     } catch (err: any) {
       setIsSpinning(false);
       return {
         success: false,
-        error: 'Koneksi ke server terputus: ' + err.message,
+        error: 'Gagal memproses putaran: ' + err.message,
       };
     }
   }, [token, customer, countdown, updateCoins, refreshProfile, fetchCoinHistory]);

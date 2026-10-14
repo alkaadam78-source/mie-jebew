@@ -538,9 +538,10 @@ export function App() {
   const checkMaintenance = useCallback(async () => {
     try {
       const res = await fetch('/api/public/maintenance-status');
-      if (res.ok) {
-        const data = await res.json();
-        setMaintenanceStatus(data);
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
+        const data = await res.json().catch(() => null);
+        if (data) setMaintenanceStatus(data);
       }
     } catch {
       // silent fallback
