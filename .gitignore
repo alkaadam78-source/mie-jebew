@@ -31,3 +31,6 @@ scratch/
 Thumbs.db
 .idea/
 .vscode/
+
+# Netlify temp
+.netlify/
