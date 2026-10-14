@@ -57,9 +57,14 @@ app.use((_req, res, next) => {
 });
 
 // Ensure upload directory exists and serve as static assets
-const UPLOAD_DIR = path.resolve(process.cwd(), 'public', 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const UPLOAD_DIR = isServerless ? '/tmp/uploads' : path.resolve(process.cwd(), 'public', 'uploads');
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('Notice: upload dir init skipped in serverless', e);
 }
 app.use('/uploads', express.static(UPLOAD_DIR));
 
@@ -125,7 +130,8 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
   res.status(status).json({ error: message });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+if (!process.env.NETLIFY && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  app.listen(PORT, '0.0.0.0', () => {
   console.log(`===============================================`);
   console.log(` Mie Jebew CMS Server running on port ${PORT}`);
   console.log(` API Endpoint: http://localhost:${PORT}/api`);
@@ -148,5 +154,6 @@ app.listen(PORT, '0.0.0.0', () => {
     }, 14 * 60 * 1000);
   }
 });
+}
 
 export default app;

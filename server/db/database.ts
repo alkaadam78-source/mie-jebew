@@ -3,12 +3,36 @@ import path from 'path';
 import fs from 'fs';
 import bcrypt from 'bcryptjs';
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = isServerless ? '/tmp' : path.resolve(process.cwd(), 'data');
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('Notice: data dir mkdir skipped in serverless', e);
 }
 
 const DB_PATH = path.join(DATA_DIR, 'database.sqlite');
+
+if (isServerless && !fs.existsSync(DB_PATH)) {
+  const seedCandidates = [
+    path.resolve(process.cwd(), 'data', 'database.sqlite'),
+    path.resolve(__dirname, '..', '..', 'data', 'database.sqlite'),
+    path.resolve(__dirname, '..', 'data', 'database.sqlite'),
+  ];
+  for (const cand of seedCandidates) {
+    if (fs.existsSync(cand)) {
+      try {
+        fs.copyFileSync(cand, DB_PATH);
+        break;
+      } catch (e) {
+        console.warn('Failed to copy seed database:', e);
+      }
+    }
+  }
+}
+
 export const db = new Database(DB_PATH);
 
 // Enable WAL mode for high concurrency and performance

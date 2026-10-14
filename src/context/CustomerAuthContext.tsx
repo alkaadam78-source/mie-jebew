@@ -30,12 +30,27 @@ interface CustomerAuthContextType {
   logout: () => void;
   refreshProfile: () => Promise<void>;
   updateCoins: (newBalance: number) => void;
+  recordSpinUsed: (newBalance: number) => void;
 }
 
 const STORAGE_KEYS = {
   TOKEN: 'jebew_customer_token',
   USER: 'jebew_customer_user',
 };
+
+export function isSpinAllowedToday(phone?: string, lastSpinDate?: string | null): boolean {
+  if (!phone) return true;
+  try {
+    const todayWIB = new Date().toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta' });
+    const localSpin = localStorage.getItem('jebew_last_spin_' + phone);
+    if (localSpin === todayWIB) return false;
+    if (lastSpinDate) {
+      const lastWIB = new Date(lastSpinDate).toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta' });
+      if (lastWIB === todayWIB) return false;
+    }
+  } catch {}
+  return true;
+}
 
 function calculateCountdown(): CountdownWIB {
   const now = new Date();
@@ -73,7 +88,12 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [customer, setCustomer] = useState<CustomerUser | null>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.USER);
-      return saved ? JSON.parse(saved) : null;
+      if (!saved) return null;
+      const u = JSON.parse(saved);
+      if (u) {
+        u.canSpinToday = isSpinAllowedToday(u.phone, u.lastSpinDate);
+      }
+      return u;
     } catch {
       return null;
     }
@@ -176,12 +196,13 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
       // Fallback offline-resilient local customer session (Netlify / Static Cloud Mode)
       if (!isSuccess || !userData) {
+        const canSpin = isSpinAllowedToday(phone.trim());
         userData = {
           id: 'cust_' + Date.now().toString(36),
           name: name.trim(),
           phone: phone.trim(),
           coinsBalance: 10,
-          canSpinToday: true,
+          canSpinToday: canSpin,
           created_at: new Date().toISOString(),
         };
         userToken = 'local_' + Date.now().toString(36);
@@ -211,6 +232,24 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
     } catch {}
   }, []);
 
+    const recordSpinUsed = useCallback((newBalance: number) => {
+    const todayWIB = new Date().toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta' });
+    setCustomer((prev) => {
+      if (!prev) return null;
+      const updated = {
+        ...prev,
+        coinsBalance: newBalance,
+        canSpinToday: false,
+        lastSpinDate: new Date().toISOString(),
+      };
+      try {
+        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(updated));
+        localStorage.setItem('jebew_last_spin_' + prev.phone, todayWIB);
+      } catch {}
+      return updated;
+    });
+  }, []);
+
   const updateCoins = useCallback((newBalance: number) => {
     setCustomer((prev) => {
       if (!prev) return null;
@@ -237,6 +276,7 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
         logout,
         refreshProfile,
         updateCoins,
+        recordSpinUsed,
       }}
     >
       {children}

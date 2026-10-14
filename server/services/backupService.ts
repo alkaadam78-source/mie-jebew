@@ -19,9 +19,14 @@ export interface BackupRecord {
   created_at: string;
 }
 
-export const BACKUP_DIR = path.resolve(process.cwd(), 'data', 'backups');
-if (!fs.existsSync(BACKUP_DIR)) {
-  fs.mkdirSync(BACKUP_DIR, { recursive: true });
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
+export const BACKUP_DIR = isServerless ? '/tmp/backups' : path.resolve(process.cwd(), 'data', 'backups');
+try {
+  if (!fs.existsSync(BACKUP_DIR)) {
+    fs.mkdirSync(BACKUP_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('Notice: backup dir init skipped in serverless', e);
 }
 
 export const BACKUP_TABLES = [

@@ -59,6 +59,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "/rasa-mie/Original.jpeg",
     badge: "🔥 SERBA 10K",
     isSpicySelectable: true,
+    is_active: 1,
     isPopular: true,
     isBestSeller: true,
   },
@@ -71,6 +72,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "mie-3",
@@ -81,6 +83,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "mie-4",
@@ -91,6 +94,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "mie-5",
@@ -101,6 +105,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
 
   // PAKET (SERBA 10 RIBU)
@@ -113,6 +118,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "paket-2",
@@ -123,6 +129,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
 
   // TOPPING & SIDE
@@ -135,6 +142,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "side-2",
@@ -145,6 +153,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "side-3",
@@ -155,6 +164,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
 
   // MINUMAN
@@ -167,6 +177,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "minuman-2",
@@ -177,6 +188,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
   {
     id: "minuman-3",
@@ -187,6 +199,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: "",
     badge: "❓ SEGERA HADIR",
     isSpicySelectable: false,
+    is_active: 1,
   },
 ];
 

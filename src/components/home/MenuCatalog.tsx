@@ -29,10 +29,8 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
   const { menu: liveMenu } = usePublicData();
 
   const sourceItems = useMemo(() => {
-    if (liveMenu && liveMenu.length > 0) {
-      return liveMenu.filter((m) => Boolean(m.is_active));
-    }
-    return MENU_ITEMS;
+    const list = (liveMenu && liveMenu.length > 0) ? liveMenu : MENU_ITEMS;
+    return list.filter((m) => m.is_active === undefined || m.is_active === 1 || Boolean(m.is_active));
   }, [liveMenu]);
 
   const filteredItems = useMemo(() => {

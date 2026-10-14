@@ -65,7 +65,7 @@ export interface CoinTransactionRecord {
 }
 
 export function useSpinReward() {
-  const { customer, token, isLoggedIn, updateCoins, countdown, refreshProfile } = useCustomerAuth();
+  const { customer, token, isLoggedIn, updateCoins, recordSpinUsed, countdown, refreshProfile } = useCustomerAuth();
 
   const [vouchers, setVouchers] = useState<UserVoucher[]>([]);
   const [coinHistory, setCoinHistory] = useState<CoinTransactionRecord[]>([]);
@@ -176,11 +176,20 @@ export function useSpinReward() {
           },
         });
         const contentType = res.headers.get('content-type') || '';
-        if (res.ok && contentType.includes('application/json')) {
+        if (contentType.includes('application/json')) {
           const data = await res.json().catch(() => null);
-          if (data && data.success) {
-            isSuccess = true;
-            spinResult = data;
+          if (data) {
+            if (data.success) {
+              isSuccess = true;
+              spinResult = data;
+            } else {
+              recordSpinUsed(customer.coinsBalance || 0);
+              setIsSpinning(false);
+              return {
+                success: false,
+                error: data.error || 'Kamu sudah menggunakan jatah putar roda hari ini.',
+              };
+            }
           }
         }
       } catch {}
@@ -208,7 +217,7 @@ export function useSpinReward() {
         };
       }
 
-      updateCoins(spinResult.newBalance);
+      recordSpinUsed(spinResult.newBalance);
       setIsSpinning(false);
       return spinResult;
     } catch (err: any) {
