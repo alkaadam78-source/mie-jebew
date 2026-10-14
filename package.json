@@ -9,7 +9,8 @@
     "dev:all": "tsx server/index.ts & vite --host",
     "build": "tsc && vite build",
     "start": "npm run build && tsx server/index.ts",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "deploy": "npm run build && npx netlify deploy --prod --dir=dist"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
