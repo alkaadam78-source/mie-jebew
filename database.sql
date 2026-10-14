@@ -510,10 +510,10 @@ ON DUPLICATE KEY UPDATE `name`=VALUES(`name`);
 -- Menu Items (SERBA 10 RIBU)
 INSERT INTO `menu_items` (`id`, `name`, `category_id`, `price`, `sale_price`, `description`, `image`, `badge`, `is_spicy_selectable`, `is_popular`, `is_best_seller`, `is_active`, `sort_order`, `ingredients`) VALUES
 ('mie-1', 'Mie Jebew Original', 'mie', 10000.00, NULL, 'Mie kenyal pedas khas Jebew dengan bumbu rahasia gurih pedas nampol, taburan ayam melimpah, pangsit renyah, dan bakso lezat!', '/rasa-mie/Original.jpeg', '🔥 SERBA 10K', 1, 1, 1, 1, 1, 'Mie kenyal, chili oil khas Jebew, ayam cincang gurih, pangsit goreng, daun bawang'),
-('mie-2', 'Mie Jebew Kuah Pedas', 'mie', 10000.00, NULL, 'Menu mie kuah kaldu pedas berempah yang bikin segar dan keringat bercucuran!', '/rasa-mie/Original.jpeg', '🌶️ KUAH 10K', 1, 1, 0, 1, 2, 'Mie telur, kaldu ayam gurih, bumbu jebew pedas, bakso, sayuran segar'),
-('mie-3', 'Mie Jebew Manis Gurih', 'mie', 10000.00, NULL, 'Kombinasi bumbu kecap manis istimewa berpadu dengan chili oil jebew nendang!', '/rasa-mie/Original.jpeg', '🍯 MANIS GURIH 10K', 1, 0, 0, 1, 3, 'Mie, kecap manis racikan, cabai rawit pedas, ayam cincang, pangsit'),
-('mie-4', 'Mie Jebew Spesial Keju', 'mie', 10000.00, NULL, 'Sensasi pedas jebew lumer berpadu gurihnya saus keju spesial yang creamy!', '/rasa-mie/Original.jpeg', '🧀 CHEESE 10K', 1, 1, 0, 1, 4, 'Mie jebew, lelehan keju mozarella & keju cheddar gurih, taburan ayam'),
-('paket-1', 'Paket Hemat Pelajar 10K', 'paket', 10000.00, NULL, 'Mie Jebew Original Level Bebas + Es Teh Manis Segar Jumbo!', '/rasa-mie/Original.jpeg', '⭐ COMBO 10K', 1, 1, 1, 1, 5, '1 Porsi Mie Jebew, 1 Es Teh Jumbo'),
+('mie-2', '???', 'mie', 0.00, NULL, 'Menu rahasia dalam pengembangan resep! Nantikan sensasi pedas spesial segera.', '', '❓ SEGERA HADIR', 0, 0, 0, 1, 2, ''),
+('mie-3', '???', 'mie', 0.00, NULL, 'Menu rahasia dalam pengembangan resep! Racikan spesial bumbu gurih khas nusantara.', '', '❓ SEGERA HADIR', 0, 0, 0, 1, 3, ''),
+('mie-4', '???', 'mie', 0.00, NULL, 'Menu rahasia dalam pengembangan resep! Sensasi pedas jebew berpadu lelehan spesial.', '', '❓ SEGERA HADIR', 0, 0, 0, 1, 4, ''),
+('paket-1', '???', 'paket', 0.00, NULL, 'Menu paket rahasia dalam persiapan dapur Crave Corner.', '', '❓ SEGERA HADIR', 0, 0, 0, 1, 5, ''),
 ('topping-1', 'Pangsit Goreng Renyah (3 pcs)', 'topping', 4000.00, NULL, 'Pangsit goreng isi ayam gurih super kriuk, teman setia mie jebew!', '', '🥟 RENYAH', 0, 1, 0, 1, 6, 'Kulit pangsit renyah, daging ayam cincang olahan'),
 ('minuman-1', 'Es Teh Manis Jumbo', 'minuman', 4000.00, NULL, 'Es teh manis segar ukuran jumbo penyelamat lidah terbakar dari pedasnya jebew!', '', '🧊 SEGAR JUMBO', 0, 1, 0, 1, 7, 'Teh melati seduh, gula murni, es batu higienis')
 ON DUPLICATE KEY UPDATE `name`=VALUES(`name`);

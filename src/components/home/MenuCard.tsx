@@ -15,24 +15,25 @@ export const MenuCard: React.FC<MenuCardProps> = React.memo(({
   onSelect,
   onOpenRating,
 }) => {
-  // Evaluasi kelengkapan data menu
-  const hasImage = Boolean(item.image && item.image.trim().length > 0);
-  const hasValidName = Boolean(item.name && item.name.trim() !== '???');
-  const hasValidPrice = typeof item.price === 'number' && item.price > 0;
+  // Yang tersedia HANYA Mie Jebew Original
+  const isOriginalMie = item.id === 'mie-1' || (item.name && item.name.toLowerCase().includes('mie jebew original'));
 
-  // Menu dianggap siap dipesan jika foto, nama asli, dan harga sudah valid
-  const isOrderable = hasImage && hasValidName && hasValidPrice;
+  const hasImage = isOriginalMie && Boolean(item.image && item.image.trim().length > 0);
+  const hasValidName = isOriginalMie && Boolean(item.name && item.name.trim() !== '???');
+  const hasValidPrice = isOriginalMie && typeof item.price === 'number' && item.price > 0;
 
-  // Nama & Foto
-  const displayImage = hasImage ? item.image : '';
-  const displayName = hasValidName ? item.name : '???';
+  // Menu dianggap siap dipesan HANYA jika Mie Jebew Original
+  const isOrderable = isOriginalMie && hasImage && hasValidName && hasValidPrice;
+
+  // Nama, Foto, Deskripsi, dan Harga disembunyikan menjadi tanda tanya (?) untuk menu lain
+  const displayImage = isOrderable ? item.image : '';
+  const displayName = isOrderable ? item.name : '???';
+  const displayDescription = isOrderable ? item.description : '???';
   const categoryLabel = (item.category || item.category_id || 'mie').toUpperCase();
 
-  // Harga: Jika admin mengedit harga (> 0), harga TERSEBUT WAJIB LANGSUNG TAMPIL!
-  // Jangan pernah sembunyikan harga jika admin sudah mengisi harganya di dashboard!
   const hasSalePrice = Boolean(item.sale_price && item.sale_price > 0 && item.price > item.sale_price);
   const currentPrice = hasSalePrice ? item.sale_price! : item.price;
-  const displayPriceText = hasValidPrice ? `Rp${currentPrice.toLocaleString('id-ID')}` : 'Rp ???';
+  const displayPriceText = isOrderable ? `Rp${currentPrice.toLocaleString('id-ID')}` : 'Rp ???';
 
   return (
     <div id={`menu-item-${item.id}`} className="group flex flex-col bg-white border-3 border-black rounded-2xl overflow-hidden shadow-brutal hover:shadow-brutal-lg transition-all duration-150 h-full justify-between scroll-mt-28">
@@ -113,7 +114,7 @@ export const MenuCard: React.FC<MenuCardProps> = React.memo(({
           </div>
 
           <p className="text-xs sm:text-sm font-medium text-gray-700 line-clamp-2 leading-relaxed">
-            {item.description}
+            {displayDescription}
           </p>
 
           {/* Interactive Rating Strip */}
