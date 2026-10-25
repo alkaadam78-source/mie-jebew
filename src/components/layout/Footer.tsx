@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Phone, MapPin, Heart, ShieldCheck, LockIcon } from '../ui/Icons';
+import { Flame, Phone, MapPin, Heart, ShieldCheck } from '../ui/Icons';
 import { InstagramIcon } from '../ui/Icons';
 import { STORE_CONFIG } from '../../config/store';
 import { ScrollReveal } from '../ui/ScrollReveal';
@@ -129,17 +129,10 @@ export const Footer: React.FC = () => {
           </div>
         </ScrollReveal>
 
-        {/* Bottom copyright & Admin Portal Link */}
+        {/* Bottom copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-400 text-center sm:text-left font-medium">
           <p>© {new Date().getFullYear()} Mie Jebew Official. Hak Cipta Dilindungi.</p>
           <div className="flex items-center gap-4">
-            <a
-              href="/admin"
-              className="flex items-center gap-1 text-[11px] text-neutral-400 hover:text-brand-yellow font-bold uppercase transition-colors"
-            >
-              <LockIcon className="w-3.5 h-3.5" />
-              <span>Admin CMS Portal</span>
-            </a>
             <p className="flex items-center justify-center gap-1">
               Dibuat dengan rasa cinta kuliner pedas nusantara <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
             </p>

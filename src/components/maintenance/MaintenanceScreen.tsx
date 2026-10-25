@@ -37,12 +37,6 @@ export const MaintenanceScreen: React.FC<MaintenanceScreenProps> = ({
           <span className="px-3 py-1 bg-brand-red text-white font-black text-xs uppercase border-2 border-black animate-pulse">
             🚨 MAINTENANCE MODE
           </span>
-          <a
-            href="/admin"
-            className="hidden sm:inline-block px-2.5 py-1 bg-white hover:bg-neutral-100 border-2 border-black font-black text-[11px] uppercase text-black"
-          >
-            Akses Admin &rarr;
-          </a>
         </div>
       </header>
 
@@ -116,9 +110,6 @@ export const MaintenanceScreen: React.FC<MaintenanceScreenProps> = ({
           >
             <InstagramIcon className="w-3.5 h-3.5 text-brand-red" />
             <span>Resep Gily</span>
-          </a>
-          <a href="/admin" className="text-neutral-500 hover:text-neutral-300 text-[11px] uppercase">
-            Login Admin
           </a>
         </div>
       </footer>

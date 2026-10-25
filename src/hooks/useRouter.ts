@@ -20,9 +20,12 @@ export function useRouter() {
     }
   }, []);
 
+  const hostname = typeof window !== 'undefined' ? window.location.hostname.toLowerCase() : '';
+  const isAdminDomain = hostname.startsWith('admin.') || hostname.startsWith('cms.');
+
   return {
     path: currentPath,
     navigate,
-    isAdminRoute: currentPath.startsWith('/admin'),
+    isAdminRoute: currentPath.startsWith('/admin') || isAdminDomain,
   };
 }
