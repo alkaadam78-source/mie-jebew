@@ -61,9 +61,24 @@ export async function verifyCustomerAuth(
     }
 
     if (!userData) {
-      userData = db.prepare(
-        `SELECT id, phone, name, coins_balance, last_spin_wib_date FROM customer_users WHERE id = ?`
-      ).get(decoded.id) as any;
+      try {
+        userData = db.prepare(
+          `SELECT id, phone, name, coins_balance, last_spin_wib_date FROM customer_users WHERE id = ?`
+        ).get(decoded.id) as any;
+      } catch {}
+    }
+
+    // Netlify / Serverless stateless recovery:
+    // Jika JWT valid tetapi container Lambda baru / database cloud belum sinkron,
+    // pulihkan sesi dari decoded JWT agar user tidak tertendang keluar (401 USER_NOT_FOUND)
+    if (!userData && decoded && decoded.id && decoded.phone) {
+      userData = {
+        id: decoded.id,
+        phone: decoded.phone,
+        name: decoded.name || 'Pelanggan',
+        coins_balance: 0,
+        last_spin_wib_date: null,
+      };
     }
 
     if (!userData) {

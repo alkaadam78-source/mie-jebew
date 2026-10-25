@@ -26,7 +26,7 @@ interface CustomerAuthContextType {
   isAuthModalOpen: boolean;
   openAuthModal: () => void;
   closeAuthModal: () => void;
-  login: (phone: string, name: string) => Promise<{ success: boolean; error?: string }>;
+  login: (phone: string, name?: string) => Promise<{ success: boolean; error?: string; notRegistered?: boolean }>;
   logout: () => void;
   refreshProfile: () => Promise<void>;
   updateCoins: (newBalance: number) => void;
@@ -113,18 +113,8 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const openAuthModal = useCallback(() => setIsAuthModalOpen(true), []);
   const closeAuthModal = useCallback(() => {
-    // Hanya bisa ditutup jika pengunjung sudah terdaftar / masuk
-    if (customer) {
-      setIsAuthModalOpen(false);
-    }
-  }, [customer]);
-
-  // Gerbang Masuk Wajib: Selalu buka modal jika belum masuk
-  useEffect(() => {
-    if (!isLoading && !customer) {
-      setIsAuthModalOpen(true);
-    }
-  }, [isLoading, customer]);
+    setIsAuthModalOpen(false);
+  }, []);
 
   const refreshProfile = useCallback(async () => {
     if (!token) {
@@ -151,11 +141,14 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
           } catch {}
         }
       } else if (res.status === 401) {
-        // Token expired
-        setToken(null);
-        setCustomer(null);
-        localStorage.removeItem(STORAGE_KEYS.TOKEN);
-        localStorage.removeItem(STORAGE_KEYS.USER);
+        // Pada cloud/serverless Netlify, jika container restart dan user belum tersinkron di server baru,
+        // pertahankan data user lokal agar tidak tertendang keluar
+        if (token.startsWith('local_')) {
+          setToken(null);
+          setCustomer(null);
+          localStorage.removeItem(STORAGE_KEYS.TOKEN);
+          localStorage.removeItem(STORAGE_KEYS.USER);
+        }
       }
     } catch (err) {
       console.warn('Gagal memuat profil customer:', err);
@@ -168,60 +161,103 @@ export const CustomerAuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
     refreshProfile();
   }, [refreshProfile]);
 
-  const login = useCallback(async (phone: string, name: string): Promise<{ success: boolean; error?: string }> => {
-    try {
-      let isSuccess = false;
-      let userData: any = null;
-      let userToken: string = '';
-
+  const login = useCallback(
+    async (phone: string, name?: string): Promise<{ success: boolean; error?: string; notRegistered?: boolean }> => {
       try {
-        const res = await fetch('/api/customer/auth/login-or-register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, name }),
-        });
-
-        const contentType = res.headers.get('content-type') || '';
-        if (res.ok && contentType.includes('application/json')) {
-          const data = await res.json().catch(() => null);
-          if (data && data.success) {
-            isSuccess = true;
-            userData = data.user;
-            userToken = data.token;
-          }
+        const rawPhone = phone.trim().replace(/[^0-9]/g, '');
+        let cleanPhone = rawPhone;
+        if (cleanPhone.startsWith('0')) {
+          cleanPhone = '62' + cleanPhone.slice(1);
+        } else if (cleanPhone.startsWith('8')) {
+          cleanPhone = '62' + cleanPhone;
         }
-      } catch (e) {
-        console.warn('Backend login fallback to local session:', e);
+
+        const cleanName = name ? name.trim() : '';
+
+        // Baca histori akun yang pernah terdaftar di browser/HP ini
+        let knownCustomers: Record<string, any> = {};
+        try {
+          const stored = localStorage.getItem('jebew_known_customers');
+          if (stored) knownCustomers = JSON.parse(stored);
+        } catch {}
+
+        const localSavedUser = knownCustomers[cleanPhone];
+
+        let isSuccess = false;
+        let userData: any = null;
+        let userToken: string = '';
+        let isNotRegistered = false;
+        let serverError = '';
+
+        try {
+          const res = await fetch('/api/customer/auth/login-or-register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: cleanPhone, name: cleanName || localSavedUser?.name || '' }),
+          });
+
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json().catch(() => null);
+            if (data) {
+              if (data.success) {
+                isSuccess = true;
+                userData = data.user;
+                userToken = data.token;
+              } else if (data.notRegistered) {
+                isNotRegistered = true;
+                serverError = data.error || 'Nomor WhatsApp belum terdaftar.';
+              } else if (data.error) {
+                serverError = data.error;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Backend login fallback to local session:', e);
+        }
+
+        // Jika nomor belum terdaftar dan user belum memasukkan nama:
+        if (isNotRegistered && !cleanName && !localSavedUser) {
+          return {
+            success: false,
+            notRegistered: true,
+            error: serverError || 'Nomor WhatsApp belum terdaftar. Silakan lengkapi nama Anda untuk membuat akun baru.',
+          };
+        }
+
+        // Fallback offline-resilient local customer session (Netlify / Static Cloud Mode)
+        if (!isSuccess || !userData) {
+          const resolvedName = cleanName || localSavedUser?.name || ('Pelanggan ' + cleanPhone.slice(-4));
+          const canSpin = isSpinAllowedToday(cleanPhone);
+          userData = {
+            id: localSavedUser?.id || ('cust_' + Date.now().toString(36)),
+            name: resolvedName,
+            phone: cleanPhone,
+            coinsBalance: localSavedUser?.coinsBalance ?? 10,
+            canSpinToday: canSpin,
+            created_at: localSavedUser?.created_at || new Date().toISOString(),
+          };
+          userToken = 'local_' + Date.now().toString(36);
+        }
+
+        setToken(userToken);
+        setCustomer(userData);
+
+        try {
+          localStorage.setItem(STORAGE_KEYS.TOKEN, userToken);
+          localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
+          knownCustomers[cleanPhone] = userData;
+          localStorage.setItem('jebew_known_customers', JSON.stringify(knownCustomers));
+        } catch {}
+
+        setIsAuthModalOpen(false);
+        return { success: true };
+      } catch (err: any) {
+        return { success: false, error: err.message || 'Gagal masuk.' };
       }
-
-      // Fallback offline-resilient local customer session (Netlify / Static Cloud Mode)
-      if (!isSuccess || !userData) {
-        const canSpin = isSpinAllowedToday(phone.trim());
-        userData = {
-          id: 'cust_' + Date.now().toString(36),
-          name: name.trim(),
-          phone: phone.trim(),
-          coinsBalance: 10,
-          canSpinToday: canSpin,
-          created_at: new Date().toISOString(),
-        };
-        userToken = 'local_' + Date.now().toString(36);
-      }
-
-      setToken(userToken);
-      setCustomer(userData);
-
-      try {
-        localStorage.setItem(STORAGE_KEYS.TOKEN, userToken);
-        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
-      } catch {}
-
-      setIsAuthModalOpen(false);
-      return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'Gagal masuk.' };
-    }
-  }, []);
+    },
+    []
+  );
 
   const logout = useCallback(() => {
     setToken(null);

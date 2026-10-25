@@ -39,27 +39,21 @@ customerAuthRouter.post('/login-or-register', async (req: Request, res: Response
       return res.status(400).json({ error: 'Nomor WhatsApp / HP wajib diisi.' });
     }
 
-    if (!name || typeof name !== 'string' || name.trim().length < 3) {
-      return res.status(400).json({ error: 'Nama asli wajib diisi (minimal 3 karakter).' });
-    }
-
-    const cleanName = name.trim();
-    const lettersCount = (cleanName.match(/[a-zA-Z]/g) || []).length;
-    if (lettersCount < 3) {
-      return res.status(400).json({ error: 'Nama asli harus mengandung minimal 3 huruf yang valid (contoh: Budi Santoso).' });
-    }
-
     const cleanPhone = normalizePhoneNumber(phone);
     if (cleanPhone.length < 10 || cleanPhone.length > 15 || !cleanPhone.startsWith('628')) {
       return res.status(400).json({ error: 'Nomor WhatsApp tidak valid. Masukkan nomor WhatsApp Indonesia aktif (contoh: 081234567890).' });
     }
+
+    const hasName = Boolean(name && typeof name === 'string' && name.trim().length > 0);
+    const cleanName = hasName ? (name as string).trim() : '';
+
     const todayWIB = getTodayWIB();
     const nowIso = new Date().toISOString();
     const pool = getMySQLPool();
 
     let user: any = null;
 
-    // 1. Cek / Simpan di MySQL (phpMyAdmin)
+    // 1. Cek di MySQL jika tersedia
     if (pool) {
       try {
         const [rows]: any = await pool.execute(
@@ -70,15 +64,61 @@ customerAuthRouter.post('/login-or-register', async (req: Request, res: Response
         if (rows && rows.length > 0) {
           user = rows[0];
           // Update nama jika user mengisi nama baru
-          if (name && name.trim() && user.name !== cleanName) {
+          if (cleanName && user.name !== cleanName) {
             await pool.execute(
               `UPDATE customer_users SET name = ?, updated_at = NOW() WHERE id = ?`,
               [cleanName, user.id]
             );
             user.name = cleanName;
           }
-        } else {
-          // Buat akun baru di MySQL
+        }
+      } catch (err: any) {
+        console.warn('[CustomerAuth] MySQL query fallback to SQLite:', err.message);
+      }
+    }
+
+    // 2. Cek di SQLite jika belum ditemukan di MySQL
+    if (!user) {
+      try {
+        const sqliteUser = db.prepare(`SELECT * FROM customer_users WHERE phone = ?`).get(cleanPhone) as any;
+        if (sqliteUser) {
+          user = sqliteUser;
+          if (cleanName && sqliteUser.name !== cleanName) {
+            try {
+              db.prepare(`UPDATE customer_users SET name = ?, updated_at = ? WHERE id = ?`).run(cleanName, nowIso, sqliteUser.id);
+              user.name = cleanName;
+            } catch {}
+          }
+        }
+      } catch (sqliteErr: any) {
+        console.warn('[CustomerAuth] SQLite query warning:', sqliteErr.message);
+      }
+    }
+
+    // 3. Jika nomor BELUM TERDAFTAR dan user BELUM memasukkan nama (sedang di mode Login biasa):
+    // Beri tahu frontend agar beralih ke form pendaftaran dengan ramah
+    if (!user && !hasName) {
+      return res.json({
+        success: false,
+        notRegistered: true,
+        error: 'Nomor WhatsApp belum terdaftar. Silakan lengkapi nama Anda untuk membuat akun baru.',
+      });
+    }
+
+    // 4. Jika nomor BELUM TERDAFTAR dan user SUDAH memasukkan nama (Daftar Akun Baru):
+    if (!user && hasName) {
+      if (cleanName.length < 3) {
+        return res.status(400).json({ error: 'Nama asli wajib diisi (minimal 3 karakter).' });
+      }
+
+      const lettersCount = (cleanName.match(/[a-zA-Z]/g) || []).length;
+      if (lettersCount < 3) {
+        return res.status(400).json({ error: 'Nama asli harus mengandung minimal 3 huruf yang valid (contoh: Budi Santoso).' });
+      }
+
+      // Simpan ke MySQL jika ada
+      if (pool) {
+        try {
           const [insertRes]: any = await pool.execute(
             `INSERT INTO customer_users (phone, name, coins_balance, created_at, updated_at)
              VALUES (?, ?, 0, NOW(), NOW())`,
@@ -91,32 +131,19 @@ customerAuthRouter.post('/login-or-register', async (req: Request, res: Response
             coins_balance: 0,
             last_spin_wib_date: null,
           };
-
-          // Catat bonus sambutan ke security_log / activity
-          await logSecurityEvent(
-            user.id,
-            clientIp,
-            'NEW_CUSTOMER_REGISTERED',
-            `Pendaftaran pelanggan baru via WhatsApp: ${cleanPhone} (${cleanName})`,
-            'info',
-            userAgent
-          );
+        } catch (err: any) {
+          console.warn('[CustomerAuth] MySQL insert fallback:', err.message);
         }
-      } catch (err: any) {
-        console.warn('[CustomerAuth] MySQL query fallback to SQLite:', err.message);
       }
-    }
 
-    // 2. Cek / Simpan di SQLite (Dual-write persistensi agar offline-resilient & tercatat jelas)
-    try {
-      const sqliteUser = db.prepare(`SELECT * FROM customer_users WHERE phone = ?`).get(cleanPhone) as any;
-      if (!sqliteUser) {
-        const insertStmt = db.prepare(`
-          INSERT INTO customer_users (phone, name, coins_balance, created_at, updated_at)
-          VALUES (?, ?, 0, ?, ?)
-        `).run(cleanPhone, cleanName, nowIso, nowIso);
+      // Simpan ke SQLite
+      if (!user) {
+        try {
+          const insertStmt = db.prepare(`
+            INSERT INTO customer_users (phone, name, coins_balance, created_at, updated_at)
+            VALUES (?, ?, 0, ?, ?)
+          `).run(cleanPhone, cleanName, nowIso, nowIso);
 
-        if (!user) {
           user = {
             id: insertStmt.lastInsertRowid,
             phone: cleanPhone,
@@ -124,26 +151,41 @@ customerAuthRouter.post('/login-or-register', async (req: Request, res: Response
             coins_balance: 0,
             last_spin_wib_date: null,
           };
-
-          await logSecurityEvent(
-            user.id,
-            clientIp,
-            'NEW_CUSTOMER_REGISTERED',
-            `Pendaftaran pelanggan baru via WhatsApp: ${cleanPhone} (${cleanName})`,
-            'info',
-            userAgent
-          );
-        }
-      } else {
-        if (!user) {
-          user = sqliteUser;
-        }
-        if (sqliteUser.name !== cleanName) {
-          db.prepare(`UPDATE customer_users SET name = ?, updated_at = ? WHERE id = ?`).run(cleanName, nowIso, sqliteUser.id);
+        } catch (sqliteErr: any) {
+          console.warn('[CustomerAuth] SQLite insert fallback:', sqliteErr.message);
         }
       }
-    } catch (sqliteErr: any) {
-      console.warn('[CustomerAuth] SQLite sync warning:', sqliteErr.message);
+
+      // Fallback stateless serverless (Netlify cloud mode tanpa DB eksternal)
+      if (!user) {
+        user = {
+          id: Date.now(),
+          phone: cleanPhone,
+          name: cleanName,
+          coins_balance: 0,
+          last_spin_wib_date: null,
+        };
+      }
+
+      await logSecurityEvent(
+        user.id,
+        clientIp,
+        'NEW_CUSTOMER_REGISTERED',
+        `Pendaftaran pelanggan baru via WhatsApp: ${cleanPhone} (${cleanName})`,
+        'info',
+        userAgent
+      );
+    }
+
+    // Safety fallback jika user masih null
+    if (!user) {
+      user = {
+        id: Date.now(),
+        phone: cleanPhone,
+        name: cleanName || ('Pelanggan ' + cleanPhone.slice(-4)),
+        coins_balance: 0,
+        last_spin_wib_date: null,
+      };
     }
 
     const token = generateCustomerToken({
